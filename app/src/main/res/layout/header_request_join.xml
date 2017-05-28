@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:layout_marginTop="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout android:orientation="vertical"
+        android:id="@+id/card1"
+        android:elevation="3dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/txtJumlahMintaJoin"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8 orang meminta join dalam request ini"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey"/>
+
+        <RelativeLayout
+            android:id="@+id/data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgAva"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/dummy"
+                android:layout_toEndOf="@+id/checkbox"
+                android:layout_toRightOf="@+id/checkbox" />
+
+            <TextView
+                android:layout_toEndOf="@+id/imgAva"
+                android:layout_toRightOf="@+id/imgAva"
+                android:id="@+id/txtNama"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/txtTitle"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_toStartOf="@+id/txtDate"
+                android:layout_toLeftOf="@+id/txtDate"
+                android:textColor="@color/title_font"
+                android:text="Rangga Rizky" />
+
+
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey"/>
+
+        <RelativeLayout
+            android:id="@+id/data2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgAva2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/dummy"
+                android:layout_toEndOf="@+id/checkbox"
+                android:layout_toRightOf="@+id/checkbox" />
+
+            <TextView
+                android:layout_toEndOf="@+id/imgAva2"
+                android:layout_toRightOf="@+id/imgAva2"
+                android:id="@+id/txtNama2"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/txtTitle"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_toStartOf="@+id/txtDate"
+                android:layout_toLeftOf="@+id/txtDate"
+                android:textColor="@color/title_font"
+                android:text="Rangga Rizky" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btnLihatSemua"
+                android:layout_width="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:layout_height="40dp"
+                android:background="@drawable/primary_rounded_button"
+                android:text="LIHAT SEMUA"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:id="@id/space"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <LinearLayout android:orientation="vertical"
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:elevation="3dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/txtJumlahSudahJoin"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11 orang sudah join dalam request ini"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey"/>
+
+        </LinearLayout>
+
+</LinearLayout>

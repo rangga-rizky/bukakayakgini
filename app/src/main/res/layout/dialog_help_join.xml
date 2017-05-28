@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txtJudul"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:textStyle="bold"
+        android:textColor="@color/title_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JOIN REQUEST "/>
+
+    <TextView
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_below="@+id/txtJudul"
+        android:text="Join ke dalam request yang sudah ada apabila barang yang kamu cari sama dengan request tersebut."
+        android:id="@+id/txtDeskripsi"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/why_join"/>
+
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:layout_toEndOf="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Semakin banyak yang join ke dalam request akan semakin menarik banyak pelapak untuk menawarkan barangnya sehingga semakin cepat pula kamu dapat barang yang kamu mau."
+            android:layout_toRightOf="@+id/image" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btnTerima"
+        android:layout_width="wrap_content"
+        android:textSize="10sp"
+        android:layout_height="35dp"
+        android:background="@drawable/primary_rounded_button"
+        android:text="MENGERTI"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

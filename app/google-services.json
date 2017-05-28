@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "159366737333",
+    "firebase_url": "https://bukakayakgini.firebaseio.com",
+    "project_id": "bukakayakgini",
+    "storage_bucket": "bukakayakgini.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159366737333:android:bd29b70dc947ff55",
+        "android_client_info": {
+          "package_name": "com.example.ranggarizky.bukakayakgini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159366737333-ro4d2dn2jb0ofmhtfmd91gurdd4c1di4.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "159366737333-5mabjcplgnrrougimm3sn1ekov9cmdne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ranggarizky.bukakayakgini",
+            "certificate_hash": "9ae36d2c040999db811efc84a14ccba849e29672"
+          }
+        },
+        {
+          "client_id": "159366737333-gqka9genu6oq7ufhgcc1c0lk4n2plu6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM9kkrbHN8zgKlbRzREeirLC5CKsGSpyw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159366737333-ro4d2dn2jb0ofmhtfmd91gurdd4c1di4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,63 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:background="@color/background"
+    tools:context="com.example.ranggarizky.bukakayakgini.fragment.SettingFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_above="@+id/btnRequest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_marginTop="70dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:textColor="@color/font"
+                android:text="Barang apa yang kamu \ningin cari?" />
+
+            <TextView
+                android:id="@+id/textlabel"
+                android:layout_below="@+id/text"
+                android:layout_marginTop="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/font"
+                android:text="Nama barang yang diinginkan" />
+
+            <EditText
+                android:layout_marginLeft="-4dp"
+                android:layout_below="@+id/textlabel"
+                android:id="@+id/editBarang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contoh : Sepatu Nike Hitam"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/btnRequest"
+        android:layout_marginTop="25dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_rounded_button"
+        android:layout_alignParentBottom="true"
+        android:text="LANJUTKAN"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>
+

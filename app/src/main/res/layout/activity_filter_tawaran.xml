@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:elevation="0dp"
+            android:theme="@style/AppToolbar"
+            app:titleTextAppearance="@style/ToolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ScrollView
+            android:layout_above="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/root_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tertandai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tertandai"/>
+
+                <CheckBox
+                    android:id="@+id/checkTertandai"
+                    android:layout_below="@+id/tertandai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tampilkan Tawaran yang tertandai saja"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/light_grey"/>
+
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/kondisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kondisi"/>
+
+                <CheckBox
+                    android:id="@+id/checkBaru"
+                    android:layout_below="@+id/kondisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Baru"/>
+
+                <CheckBox
+                    android:id="@+id/checkBekas"
+                    android:layout_toEndOf="@+id/checkBaru"
+                    android:layout_below="@+id/kondisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bekas"
+                    android:layout_toRightOf="@+id/checkBaru" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/light_grey"/>
+
+
+            <CheckBox
+                android:visibility="gone"
+                android:layout_margin="16dp"
+                android:id="@+id/lokasi"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lokasi Pelapak"/>
+
+
+            <RelativeLayout
+                android:id="@+id/layoutLokasi"
+                android:visibility="invisible"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/wilayah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wilayah/Provinsi"/>
+
+                <Spinner
+                    android:id="@+id/spinnerWilayah"
+                    android:layout_marginTop="2dp"
+                    android:layout_below="@+id/wilayah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/kota"
+                    android:layout_marginTop="12dp"
+                    android:layout_below="@+id/spinnerWilayah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kota"/>
+
+                <Spinner
+                    android:id="@+id/spinnerKota"
+                    android:layout_marginTop="2dp"
+                    android:layout_below="@+id/kota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+        </ScrollView>
+
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/footer"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_weight="0.5"
+                android:id="@+id/btnReset"
+                android:layout_margin="8dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/primary_reverse_rounded_button"
+                android:layout_marginBottom="15dp"
+                android:text="RESET"
+                android:textColor="@color/colorAccent" />
+
+            <Button
+                android:layout_weight="0.5"
+                android:id="@+id/btnTerapkan"
+                android:layout_margin="8dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/primary_rounded_button"
+                android:layout_marginBottom="15dp"
+                android:text="Terapkan"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_edit"
+        android:title="Edit Request"/>
+
+    <item
+        android:id="@+id/action_close"
+        android:title="Tutup Request"/>
+
+    <item
+        android:id="@+id/action_share"
+        android:title="Bagikan"/>
+
+</menu>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ranggarizky.bukakayakgini">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service android:name=".util.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".util.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".FirstActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".InputRequestActivity"
+            android:label="REQUEST BARANG" />
+        <activity
+            android:name=".PrepareRequestActivity"
+            android:label="REQUEST BARANG" />
+        <activity
+            android:name=".DetailRequestKuActivity"
+            android:label="DETAIL REQUEST" />
+        <activity
+            android:name=".DetailRequestJoinActivity"
+            android:label="DETAIL REQUEST" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".CategoryActivity" />
+        <activity
+            android:name=".TawaranListActivity"
+            android:label="BARANG TAWARAN" />
+        <activity
+            android:name=".FilterTawaranActivity"
+            android:label="FILTER" />
+        <activity
+            android:name=".DetailTawaranActivity"
+            android:label="DETAIL TAWARAN" />
+        <activity
+            android:name=".NotificationActivity"
+            android:label="NOTIFIKASI" />
+        <activity
+            android:name=".DetailRequestActivity"
+            android:label="DETAIL REQUEST" />
+        <activity
+            android:name=".EditRequestActivity"
+            android:label="EDIT REQUEST" />
+        <activity android:name=".TawarkanActivity" />
+        <activity
+            android:name=".RequestJoinActivity"
+            android:label="REQUEST JOIN" />
+        <activity android:name=".WebViewActivity" />
+        <activity android:name=".DetailTawarankuActivity"></activity>
+    </application>
+
+</manifest>

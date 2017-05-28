@@ -1,0 +1,112 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    </RelativeLayout>
+
+
+    <ScrollView
+
+        android:background="@color/background"
+        android:layout_above="@+id/btnRequest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/txtBukaLapak"
+                android:visibility="gone"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/font"
+                android:text="Cari Barang di Bukalapak dulu"/>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:paddingLeft="12dp"
+                android:id="@+id/horizontal_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey_border"/>
+
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    android:id="@+id/txtBukaKayaGini"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Belum menemukan? Lihat Request yang sama"/>
+
+                <ImageView
+                    android:id="@+id/btnHelp"
+                    android:layout_marginLeft="6dp"
+                    android:visibility="gone"
+                    android:layout_toEndOf="@+id/txtBukaKayaGini"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/help_round"
+                    android:layout_toRightOf="@+id/txtBukaKayaGini" />
+
+
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:paddingLeft="12dp"
+                android:id="@+id/horizontal_request_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_margin="16dp"
+        android:id="@+id/btnRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_rounded_button"
+        android:layout_gravity="bottom"
+        android:padding="6dp"
+        android:text="Tidak ada yang cocok"
+        android:textColor="@color/white" />
+
+</FrameLayout>

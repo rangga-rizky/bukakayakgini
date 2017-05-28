@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/utama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_grey"
+        android:padding="16dp">
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgBarang"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/dummy"/>
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imgBarang"
+            android:layout_toRightOf="@+id/imgBarang"
+            android:id="@+id/txtHarga"
+            android:layout_marginLeft="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_toStartOf="@+id/txtDate"
+            android:layout_toLeftOf="@+id/txtDate"
+            android:textColor="@color/black"
+            android:text="Rp.50.000" />
+
+        <TextView
+            android:text="Status"
+            android:id="@+id/txtStatus"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txtDate"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border_rounded_noborder"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="3dp"
+            android:textSize="10sp"
+            android:textColor="@color/grey"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"/>
+
+
+</LinearLayout>

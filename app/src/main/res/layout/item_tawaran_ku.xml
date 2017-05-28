@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardElevation="4dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/utama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <RelativeLayout
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/untuk"
+                android:textColor="@color/font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Untuk "/>
+
+            <TextView
+                android:layout_toEndOf="@+id/untuk"
+                android:id="@+id/txtNama"
+                android:textColor="@color/title_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_toRightOf="@+id/untuk" />
+
+
+            <TextView
+                android:layout_below="@+id/txtNama"
+                android:layout_marginTop="2dp"
+                android:id="@+id/txtTitle"
+                android:textStyle="bold|italic"
+                android:textSize="15sp"
+                android:textColor="@color/title_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="&#34; Sepatu nike putih dengan 3 garis putih di sampingnya &#34;"
+                />
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_list"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="LinearLayoutManager"
+            android:visibility="visible">
+        </android.support.v7.widget.RecyclerView>
+
+
+       
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

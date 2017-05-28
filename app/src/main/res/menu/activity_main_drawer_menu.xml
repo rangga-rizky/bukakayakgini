@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_requestku"
+            android:icon="@drawable/requestku"
+            android:title="Request Barang" />
+        <item
+            android:id="@+id/nav_request_lain"
+            android:icon="@drawable/tawar"
+            android:title="Menawarkan Barang" />
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile_icon"
+            android:title="Profile Saya" />
+
+        <item
+            android:id="@+id/nav_bantuan"
+            android:icon="@drawable/bantuan"
+            android:title="Pusat Bantuan" />
+
+        <item
+            android:id="@+id/nav_bukakayakgini"
+            android:icon="@drawable/about"
+            android:title="Tentang BukaKayakGini" />
+
+        <item
+            android:id="@+id/nav_aplikasi"
+            android:icon="@drawable/info"
+            android:title="Tentang Aplikasi" />
+    </group>
+
+</menu>

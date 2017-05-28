@@ -1,0 +1,73 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/empty_view"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/empty_tawaran"/>
+
+
+        <TextView
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/title_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bantu para calon pembeli  mendapatkan barang yang mereka inginkan."/>
+
+        <TextView
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ribuan calon pembeli potensial kesulitan menemukan barang sesuai keinginannya dan telah melakukan request di BukaKayakGini. Jika kamu mempunyai barangnya, bantu mereka dengan menawarkan barangmu. Raih kesempatan mendapatkan pembeli baru dan meningkatkan penjualan lapakmu."/>
+
+
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:layout_below="@+id/layoutFilter"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.v7.widget.RecyclerView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/item_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layoutManager="LinearLayoutManager"
+        android:visibility="visible">
+    </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>

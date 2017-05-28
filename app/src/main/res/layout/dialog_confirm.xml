@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txtJudul"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:textStyle="bold"
+        android:textColor="@color/title_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rangga Rizky "/>
+
+    <TextView
+        android:layout_centerHorizontal="true"
+
+        android:gravity="center"
+        android:textStyle="italic"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtJudul"
+        android:text="join dong bang aku mau pesan , sekalian kenalan bolen enggak, kalo boleh ayuuuk"
+        android:id="@+id/txtDeskripsi"/>
+
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txtDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+
+                android:layout_marginTop="10dp"
+                android:id="@+id/btnBatal"
+                android:layout_width="wrap_content"
+                android:textSize="10sp"
+                android:layout_height="35dp"
+                android:background="@drawable/rounded_button"
+                android:text="Batal"
+                android:layout_marginRight="12dp"
+                android:textColor="@color/grey" />
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/txtDeskripsi"
+                android:id="@+id/btnTerima"
+                android:layout_toRightOf="@+id/space"
+                android:layout_width="wrap_content"
+                android:textSize="10sp"
+                android:layout_marginLeft="12dp"
+                android:layout_height="35dp"
+                android:background="@drawable/primary_rounded_button"
+                android:text="Ya"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+
+
+
+</RelativeLayout>

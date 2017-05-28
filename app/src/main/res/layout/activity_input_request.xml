@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:elevation="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/AppToolbar"
+            app:titleTextAppearance="@style/ToolbarTitle"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_height="fill_parent"
+                android:layout_width="match_parent">
+
+        <RelativeLayout
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+                android:id="@+id/imgFoto"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/foto"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_below="@+id/imgFoto"
+                android:layout_marginTop="35dp"
+                android:id="@+id/wrapperNamabarang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama barang yang diinginkan" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:id="@+id/kategori"
+                android:layout_below="@+id/wrapperNamabarang"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/textKategori"
+                    android:textSize="12sp"
+                    android:textColor="@color/grey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kategori barang"/>
+
+                <TextView
+                    android:layout_below="@+id/textKategori"
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/txtKategori"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Kategori"/>
+
+                <View
+                    android:layout_below="@+id/txtKategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/grey"/>
+
+
+            </RelativeLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="24dp"
+                android:layout_below="@+id/kategori"
+                android:id="@+id/wrapperDeskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editDeskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Deskripsikan barang yang diinginkan" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/wrapperBudget"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/wrapperDeskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editBudget"
+                    android:layout_width="200dp"
+                    android:inputType="numberDecimal"
+                    android:digits="0123456789.-"
+                    android:layout_height="wrap_content"
+                    android:hint="Maksimal budget kamu" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="16dp"
+                android:id="@+id/checkbox"
+                android:layout_below="@+id/wrapperBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textbarang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kondisi barang yang diinginkan :"/>
+
+
+                <CheckBox
+                    android:layout_below="@+id/textbarang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cbaru"
+                    android:text="Baru"
+                    android:checked="true"
+                    />
+
+                <CheckBox
+                    android:layout_toEndOf="@+id/cbaru"
+                    android:checked="true"
+                    android:layout_below="@+id/textbarang"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cbekas"
+                    android:text="Bekas"
+                    android:layout_toRightOf="@+id/cbaru" />
+
+
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btnRequest"
+                android:layout_below="@+id/checkbox"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/primary_rounded_button"
+                android:layout_alignParentBottom="true"
+                android:text="REQUEST SEKARANG"
+                android:textColor="@color/white" />
+
+            </RelativeLayout>
+
+            </ScrollView>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
+

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:src="@drawable/navbar_bg"/>
+
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAva"
+            android:layout_width="110dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"
+            android:layout_height="110dp"
+            android:src="@drawable/avatar"/>
+
+        <TextView
+            android:layout_below="@+id/imgAva"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/txtNama"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:textColor="@color/title_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rangga Rizky "/>
+
+        <android.support.v4.widget.Space
+            android:id="@+id/space"
+            android:layout_below="@+id/txtNama"
+            android:layout_centerHorizontal="true"
+            android:layout_width="10dp"
+            android:layout_height="20dp" />
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/txtNama"
+            android:id="@+id/btnAbaikan"
+            android:layout_toLeftOf="@+id/space"
+            android:layout_width="wrap_content"
+            android:textSize="10sp"
+            android:layout_height="35dp"
+            android:background="@drawable/rounded_button"
+            android:text="Abaikan"
+            android:layout_marginRight="4dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/txtNama"
+            android:id="@+id/btnTerima"
+            android:layout_toRightOf="@+id/space"
+            android:layout_width="wrap_content"
+            android:textSize="10sp"
+            android:layout_height="35dp"
+            android:background="@drawable/primary_rounded_button"
+            android:text="Terima"
+            android:layout_marginRight="4dp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnTerima"
+            android:text="join dong bang aku mau pesan , sekalian kenalan bolen enggak, kalo boleh ayuuuk"
+            android:id="@+id/txtPesan"/>
+
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>
