@@ -320,7 +320,7 @@ public class RequestJoinAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         LinearLayout card1;
         Button btnLihatSemua;
         ImageView imgAva2,imgAva;
-        Space space;
+        android.support.v4.widget.Space space;
 
         public HeaderViewHolder (View itemView) {
             super (itemView);
@@ -334,7 +334,7 @@ public class RequestJoinAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.imgAva2 = (ImageView) itemView.findViewById (R.id.imgAva2);
             this.data = (RelativeLayout) itemView.findViewById (R.id.data);
             this.data2 = (RelativeLayout) itemView.findViewById (R.id.data2);
-            this.space = (Space) itemView.findViewById (R.id.space);
+            this.space = (android.support.v4.widget.Space) itemView.findViewById (R.id.space);
             this.btnLihatSemua = (Button) itemView.findViewById (R.id.btnLihatSemua);
         }
     }
