@@ -67,7 +67,7 @@ public class DetailRequestActivity extends AppCompatActivity {
     String id_user;
     @BindView(R.id.item_list)
     RecyclerView recyclerView;
-    private String id;
+    private String id,status_tawaran;
     private int jumlahTawaranku = 0;
     private SessionManager sessionManager;
 
@@ -130,6 +130,7 @@ public class DetailRequestActivity extends AppCompatActivity {
                         txtKondisi.setText("Baru / Bekas");
                     }
                     id = apiresponse.getData().getId();
+                    status_tawaran = apiresponse.getData().getStatus();
                     txtStatus.setText(apiresponse.getData().getStatus_caption());
                     NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
                     txtbudget.setText("Rp"+rupiahFormat.format(Double.parseDouble(apiresponse.getData().getHarga())));
@@ -179,7 +180,9 @@ public class DetailRequestActivity extends AppCompatActivity {
                     }
                     if(jumlahTawaranku < 3){
                         if(!id_user.equals(sessionManager.getUid())){
-                            btnTawar2.setVisibility(View.VISIBLE);
+                            if(!status_tawaran.equals("0")){
+                                btnTawar2.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                 }

@@ -107,8 +107,8 @@ public class ProfileFragment extends Fragment {
                     Log.e("cok", "no response");
                 } else {
                     txtJumlahRequest.setText(apiresponse.getData().getNumDemand()+ " kali request barang");
-                    txtJumlahTransaksi.setText(apiresponse.getData().getNumGotDeal()+ " kali menawarkan barang");
-                    txtJumlahMenawarkan.setText(apiresponse.getData().getNumSupply()+ " kali barang dipilih");
+                    txtJumlahTransaksi.setText(apiresponse.getData().getNumGotDeal()+ " kali barang dipilih");
+                    txtJumlahMenawarkan.setText(apiresponse.getData().getNumSupply() + " kali menawarkan barang");
 
                 }
 

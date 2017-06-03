@@ -341,12 +341,16 @@ public class RequestkuFragment extends Fragment {
         call.enqueue(new Callback<ResponseNotif>() {
             @Override
             public void onResponse(Call<ResponseNotif> call, Response<ResponseNotif> response) {
+
+                if(txtCountNotif!=null){
                 if(response.body().getCount() > 0){
                     updateNotifCOunt(response.body().getCount());
                     txtCountNotif.setVisibility(View.VISIBLE);
                 }else{
 
                     txtCountNotif.setVisibility(View.GONE);
+                }
+
                 }
             }
 

@@ -100,6 +100,7 @@ public class TawaranKuRecyclerAdapter extends RecyclerView.Adapter<TawaranKuRecy
         Call<ResponseObject> call = apiService.getUserbyID(id);
 
         //proses call
+
         call.enqueue(new Callback<ResponseObject>() {
             @Override
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {

@@ -106,7 +106,7 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
             holder.txtTandai.setVisibility(View.VISIBLE);
         }
 
-        if(position == 0 && !isFiltered){
+        if(position == 0 && !isFiltered && data.size() > 10){
             holder.txtRecommended.setVisibility(View.VISIBLE);
             holder.txtHarga.setTextColor(context.getResources().getColor(R.color.white));
             holder.txtuserCount.setTextColor(context.getResources().getColor(R.color.white));

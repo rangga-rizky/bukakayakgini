@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.ranggarizky.bukakayakgini.adapter.RequestAdapter;
 import com.example.ranggarizky.bukakayakgini.adapter.TawaranRecyclerAdapter;
+import com.example.ranggarizky.bukakayakgini.adapter.TawaranRekomendasiAdapter;
 import com.example.ranggarizky.bukakayakgini.model.ResponseTawaran;
 import com.example.ranggarizky.bukakayakgini.model.Tawaran;
 import com.example.ranggarizky.bukakayakgini.util.GridSpacingItemDecoration;
@@ -46,6 +47,7 @@ public class TawaranListActivity extends AppCompatActivity {
     private String id_request;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    private TawaranRekomendasiAdapter mAdapter;
 
     @BindView(R.id.empty_view)
     RelativeLayout empty_view;
@@ -163,8 +165,18 @@ public class TawaranListActivity extends AppCompatActivity {
     }
 
     private  void setAdapter(ArrayList<Tawaran> data,Boolean isFiltered){
-        TawaranRecyclerAdapter mAdapter = new TawaranRecyclerAdapter(this,data,isFiltered);
-        recyclerView.setAdapter(mAdapter);
+        //TawaranRecyclerAdapter mAdapter = new TawaranRecyclerAdapter(this,data,isFiltered);
+        //recyclerView.setAdapter(mAdapter);
+        if(isFiltered){
+
+        }else{
+            if(data.size() >= 10){
+
+            }else{
+                mAdapter = new TawaranRekomendasiAdapter(this,data,null);
+                recyclerView.setAdapter(mAdapter);
+            }
+        }
     }
 
     private void loadDatawithFilter(String isTandai,String statusKondisi,String kota){
