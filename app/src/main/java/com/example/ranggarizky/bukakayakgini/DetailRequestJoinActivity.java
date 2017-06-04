@@ -163,11 +163,7 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate menu resource file.
-        return false;
-    }
+
 
     @OnClick(R.id.btnJoin)
     public  void join(View view){
