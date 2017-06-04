@@ -89,6 +89,7 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("tes","tes");
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
@@ -135,12 +136,15 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
                             .placeholder(R.drawable.dummy)
                             .into(imgBarang);
                     if(!sessionManager.getUid().equals(apiresponse.getData().getId_user())){
-                        if(response.body().getUserIsJoin().equals("0")){
-                            btnJoin.setVisibility(View.VISIBLE);
-                        }else{
-                            btnJoin.setVisibility(View.VISIBLE);
-                            btnJoin.setEnabled(false);
-                            btnJoin.setText("Kamu Sudah Request join pada request ini");
+                        if(!apiresponse.getData().getStatus().equals("0") ){
+                            if(response.body().getUserIsJoin().equals("0")){
+                                btnJoin.setVisibility(View.VISIBLE);
+                            }else{
+                                btnJoin.setVisibility(View.VISIBLE);
+                                btnJoin.setEnabled(false);
+                                btnJoin.setText("Kamu Sudah Request join pada request ini");
+                            }
+
                         }
                     }
                 }
@@ -156,6 +160,8 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

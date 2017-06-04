@@ -168,9 +168,14 @@ public class TawaranListActivity extends AppCompatActivity {
         //TawaranRecyclerAdapter mAdapter = new TawaranRecyclerAdapter(this,data,isFiltered);
         //recyclerView.setAdapter(mAdapter);
         if(isFiltered){
-
+            mAdapter = new TawaranRekomendasiAdapter(this,data,null);
+            recyclerView.setAdapter(mAdapter);
         }else{
-            if(data.size() >= 10){
+            if(data.size() >= 5){
+                Tawaran header = data.get(0);
+                data.remove(0);
+                mAdapter = new TawaranRekomendasiAdapter(this,data,header);
+                recyclerView.setAdapter(mAdapter);
 
             }else{
                 mAdapter = new TawaranRekomendasiAdapter(this,data,null);

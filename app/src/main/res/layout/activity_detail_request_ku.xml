@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -49,327 +50,316 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <android.support.v4.widget.NestedScrollView
+        android:layout_above="@+id/footer"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingBottom="16dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_above="@+id/footer"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:orientation="vertical">
 
+
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_marginRight="5dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/font"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toStartOf="@+id/btnJoinRequest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/btnJoinRequest" />
+
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/btnPopup"
+                    android:layout_width="25dp"
+                    android:visibility="gone"
+                    android:layout_height="25dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/more"
+                    android:layout_alignParentRight="true" />
+
+
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/btnJoinRequest"
+                    android:layout_width="25dp"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                    android:layout_height="25dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/user_join"
+                    android:layout_toLeftOf="@+id/btnPopup"/>
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
 
             <LinearLayout
-
+                android:padding="16dp"
+                android:gravity="center_vertical"
+                android:weightSum="2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:padding="16dp"
-                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/txtTitle"
-                        android:layout_marginRight="5dp"
-                        android:textSize="18sp"
-                        android:textColor="@color/font"
-                        android:textStyle="bold"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_toStartOf="@+id/btnJoinRequest"
+                        android:id="@+id/textStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/btnJoinRequest" />
-
-
-                        <ImageButton
-                            android:layout_centerVertical="true"
-                            android:id="@+id/btnPopup"
-                            android:layout_width="25dp"
-                            android:visibility="gone"
-                            android:layout_height="25dp"
-                            android:textColor="@color/white"
-                            android:background="@drawable/more"
-                            android:layout_alignParentRight="true" />
-
-
-
-                    <ImageButton
+                        android:textColor="@color/font"
                         android:layout_centerVertical="true"
-                        android:id="@+id/btnJoinRequest"
-                        android:layout_width="25dp"
-                        android:layout_marginRight="10dp"
-                        android:visibility="gone"
-                        android:layout_height="25dp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/user_join"
-                        android:layout_toLeftOf="@+id/btnPopup"/>
+                        android:text="Status"/>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/textStatus"
+                        android:id="@+id/txtStatus"
+                        android:text=""
+                        android:textColor="@color/font"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/border"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:padding="5dp"
+                        android:textSize="12sp"
+                        android:layout_toRightOf="@+id/textStatus" />
+
 
 
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_grey"/>
-
-                <LinearLayout
-                    android:padding="16dp"
-                    android:gravity="center_vertical"
-                    android:weightSum="2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/textStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/font"
-                            android:layout_centerVertical="true"
-                            android:text="Status"/>
-
-                        <TextView
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/textStatus"
-                            android:id="@+id/txtStatus"
-                            android:text=""
-                            android:textColor="@color/font"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/border"
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:padding="5dp"
-                            android:textSize="12sp"
-                            android:layout_toRightOf="@+id/textStatus" />
-
-
-
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textSize="10sp"
-                            android:layout_below="@+id/txtTawaran"
-                            android:id="@+id/textTawaran"
-                            android:layout_centerHorizontal="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TAWARAN"/>
-
-                        <TextView
-                            android:textColor="@color/title_font"
-                            android:textStyle="bold"
-                            android:textSize="12sp"
-                            android:id="@+id/txtTawaran"
-                            android:layout_centerHorizontal="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""/>
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_weight="0.5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textSize="10sp"
-                            android:id="@+id/textUserJoin"
-                            android:layout_below="@+id/txtUserJoin"
-                            android:layout_centerHorizontal="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="USER JOIN"/>
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:textSize="12sp"
-                            android:textColor="@color/title_font"
-                            android:id="@+id/txtUserJoin"
-                            android:layout_centerHorizontal="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""/>
-
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_grey"/>
-
                 <RelativeLayout
-                    android:padding="16dp"
-                    android:layout_width="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/deskrips"
+                        android:textSize="10sp"
+                        android:layout_below="@+id/txtTawaran"
+                        android:id="@+id/textTawaran"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/font"
-                        android:text="Deskripsi"/>
+                        android:text="TAWARAN"/>
 
                     <TextView
-                        android:id="@+id/txtDeskripsi"
-                        android:layout_marginTop="6dp"
-                        android:layout_below="@+id/deskrips"
+                        android:textColor="@color/title_font"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:id="@+id/txtTawaran"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/font"
                         android:text=""/>
 
-
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_grey"/>
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:padding="16dp"
+                    android:layout_weight="0.5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/spesifikasi"
+                        android:textSize="10sp"
+                        android:id="@+id/textUserJoin"
+                        android:layout_below="@+id/txtUserJoin"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/font"
-                        android:text="Spesifikasi"/>
+                        android:text="USER JOIN"/>
 
                     <TextView
-                        android:id="@+id/kategori"
-                        android:layout_marginTop="6dp"
-                        android:layout_below="@+id/spesifikasi"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/title_font"
+                        android:id="@+id/txtUserJoin"
+                        android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/font"
-                        android:text="Kategori"/>
-
-                    <TextView
-                        android:id="@+id/txtKategori"
-                        android:layout_marginTop="6dp"
-                        android:layout_toEndOf="@+id/budget"
-                        android:layout_below="@+id/spesifikasi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/font"
-                        android:text=""
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@+id/budget" />
-
-                    <TextView
-                        android:id="@+id/kondisi"
-                        android:layout_below="@+id/kategori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/font"
-                        android:text="Kondisi"/>
-
-                    <TextView
-                        android:id="@+id/txtKondisi"
-                        android:layout_toEndOf="@+id/budget"
-                        android:layout_below="@+id/kategori"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/font"
-                        android:text=""
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@+id/budget" />
-
-                    <TextView
-                        android:id="@+id/budget"
-                        android:layout_below="@+id/kondisi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/font"
-                        android:text="Maksimal Budget"/>
-
-                    <TextView
-                        android:id="@+id/txtbudget"
-                        android:layout_toEndOf="@id/budget"
-                        android:layout_below="@+id/kondisi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/font"
-                        android:text=""
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@id/kategori" />
+                        android:text=""/>
 
                 </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_grey"/>
-
-                <LinearLayout
-                    android:id="@+id/footer"
-                    android:padding="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/btnLihatTawaran"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/primary_rounded_button"
-                        android:text="Lihat Tawaran"
-                        android:visibility="gone"
-                        android:textColor="@color/white"/>
-
-                    <Button
-                        android:id="@+id/btnJoin"
-                        android:visibility="gone"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/primary_rounded_button"
-                        android:text="Join Untuk melihat Tawaran"
-                        android:textColor="@color/white" />
-
-
-                </LinearLayout>
 
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
+
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/deskrips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/font"
+                    android:text="Deskripsi"/>
+
+                <TextView
+                    android:id="@+id/txtDeskripsi"
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@+id/deskrips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text=""/>
 
 
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="16dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/spesifikasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/font"
+                    android:text="Spesifikasi"/>
+
+                <TextView
+                    android:id="@+id/kategori"
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@+id/spesifikasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Kategori"/>
+
+                <TextView
+                    android:id="@+id/txtKategori"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@+id/budget"
+                    android:layout_below="@+id/spesifikasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text=""
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/budget" />
+
+                <TextView
+                    android:id="@+id/kondisi"
+                    android:layout_below="@+id/kategori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Kondisi"/>
+
+                <TextView
+                    android:id="@+id/txtKondisi"
+                    android:layout_toEndOf="@+id/budget"
+                    android:layout_below="@+id/kategori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text=""
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/budget" />
+
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_below="@+id/kondisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Maksimal Budget"/>
+
+                <TextView
+                    android:id="@+id/txtbudget"
+                    android:layout_toEndOf="@id/budget"
+                    android:layout_below="@+id/kondisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text=""
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/kategori" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:padding="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.example.ranggarizky.bukakayakgini.util.FixedBottomViewBehavior"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnLihatTawaran"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_rounded_button"
+            android:text="Lihat Tawaran"
+            android:visibility="gone"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/btnJoin"
+            android:visibility="gone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_rounded_button"
+            android:text="Join Untuk melihat Tawaran"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
 
-    </RelativeLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
