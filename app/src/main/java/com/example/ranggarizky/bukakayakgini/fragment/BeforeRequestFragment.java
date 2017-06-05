@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ranggarizky.bukakayakgini.BeforeRequestActivity;
 import com.example.ranggarizky.bukakayakgini.InputRequestActivity;
 import com.example.ranggarizky.bukakayakgini.PrepareRequestActivity;
 import com.example.ranggarizky.bukakayakgini.R;
@@ -193,8 +194,10 @@ public class BeforeRequestFragment extends Fragment {
 
     public void onResume(){
         super.onResume();
-        ((PrepareRequestActivity) getActivity())
-                .setActionBarTitle(namaBarang.toUpperCase());
+        if(getActivity() instanceof PrepareRequestActivity){
+            ((PrepareRequestActivity) getActivity())
+                    .setActionBarTitle(namaBarang.toUpperCase());
+        }
 
     }
 

@@ -72,7 +72,8 @@
             android:name=".RequestJoinActivity"
             android:label="REQUEST JOIN" />
         <activity android:name=".WebViewActivity" />
-        <activity android:name=".DetailTawarankuActivity"></activity>
+        <activity android:name=".DetailTawarankuActivity" />
+        <activity android:name=".BeforeRequestActivity"></activity>
     </application>
 
 </manifest>

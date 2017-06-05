@@ -3,6 +3,7 @@ package com.example.ranggarizky.bukakayakgini;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.AppBarLayout;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -27,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.ranggarizky.bukakayakgini.adapter.CustomPagerAdapter;
 import com.example.ranggarizky.bukakayakgini.model.BarangBukaLapak;
+import com.example.ranggarizky.bukakayakgini.model.Join;
 import com.example.ranggarizky.bukakayakgini.model.ResponseApi;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponsePermintaanSingle;
@@ -259,7 +262,7 @@ public class DetailTawaranActivity extends AppCompatActivity {
         Button btnTerima = (Button) dialog.findViewById(R.id.btnTerima);
         Button btnBatal = (Button) dialog.findViewById(R.id.btnBatal);
         txtJudul.setText("Pilih Tawaran");
-        txtDeskripsi.setText("Apakah Kamu yakin memberli barang ini ?");
+        txtDeskripsi.setText("Apakah Kamu yakin membeli barang ini ?");
         btnTerima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -299,7 +302,7 @@ public class DetailTawaranActivity extends AppCompatActivity {
                 } else {
                     if(apiresponse.getStatus().equals("OK")){
                         Toast.makeText(getApplicationContext(), "Barang telah ditambahkan ke keranjang bukalapak anda", Toast.LENGTH_SHORT).show();
-                        openRedirectDialog();
+                        insertDeal();
                     }else{
                         Toast.makeText(getApplicationContext(), apiresponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -344,6 +347,35 @@ public class DetailTawaranActivity extends AppCompatActivity {
         });
         btnBatal.setVisibility(View.GONE);
         dialog.show();
+    }
+
+
+
+    private  void insertDeal(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        WEB_API apiService = WEB_API.client.create(WEB_API.class);
+        Call<ResponseApi> call = apiService.deal(tawaran_id,sessionManager.getUid(),"ant0k");
+
+        //proses call
+        call.enqueue(new Callback<ResponseApi>() {
+            @Override
+            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+                progressDialog.dismiss();
+                openRedirectDialog();
+            }
+
+
+            @Override
+            public void onFailure(Call<ResponseApi> call, Throwable t) {
+                // Log error
+                Log.e("cok", "onFailure: ", t.fillInStackTrace());
+                Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
     }
 
 

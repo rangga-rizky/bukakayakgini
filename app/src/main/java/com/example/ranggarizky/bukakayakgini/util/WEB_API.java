@@ -225,9 +225,10 @@ public interface WEB_API {
                                         @Field("status") String status,
                                         @Field("secret") String secret);
 
-
-
-
-
+    @FormUrlEncoded
+    @POST("supply/deal")
+    public Call<ResponseApi> deal(@Field("id_supply") String id_supply ,
+                                                 @Field("id_buyer") String id_buyer ,
+                                                 @Field("secret") String secret);
 
 }

@@ -91,10 +91,10 @@ public class MenawarkanBarangFragment extends Fragment {
         super.onResume();
         ((MainActivity) getActivity())
                 .setActionBarTitle("MENAWARKAN BARANG");
-        AppBarLayout.LayoutParams params =
+        /*AppBarLayout.LayoutParams params =
                 (AppBarLayout.LayoutParams) ((MainActivity) getActivity()).getToolbar().getLayoutParams();
         params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
-                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);*/
     }
 
 }

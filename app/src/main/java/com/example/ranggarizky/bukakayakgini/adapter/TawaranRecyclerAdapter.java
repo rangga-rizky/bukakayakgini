@@ -25,11 +25,13 @@ import com.example.ranggarizky.bukakayakgini.R;
 import com.example.ranggarizky.bukakayakgini.model.BarangBukaLapak;
 import com.example.ranggarizky.bukakayakgini.model.Rating;
 import com.example.ranggarizky.bukakayakgini.model.RequestObject;
+import com.example.ranggarizky.bukakayakgini.model.ResponseApi;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.model.Tawaran;
 import com.example.ranggarizky.bukakayakgini.util.API;
 import com.example.ranggarizky.bukakayakgini.util.Base64Converter;
 import com.example.ranggarizky.bukakayakgini.util.SessionManager;
+import com.example.ranggarizky.bukakayakgini.util.WEB_API;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -159,13 +161,11 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
                 dialog.show();
             }
         });
-
-
         loadBarang(item.getId_produk(),holder);
 
     }
 
-    private void pilihBarang(Tawaran item){
+    private void pilihBarang(final Tawaran item){
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -189,7 +189,7 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
                     Log.e("cok", "no response");
                 } else {
                     if(apiresponse.getStatus().equals("OK")){
-                        openRedirectDialog();
+                        insertDeal(item.getId());
                         Toast.makeText(context, "Barang telah ditambahkan ke keranjang bukalapak anda", Toast.LENGTH_SHORT).show();
 
                     }else{
@@ -206,6 +206,34 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
                 progressDialog.dismiss();
                 Log.e("cok", "onFailure: ", t.fillInStackTrace());
                 Toast.makeText(context, "Connection Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private  void insertDeal(final String tawaran_id){
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        SessionManager sessionManager = new SessionManager(context);
+        WEB_API apiService = WEB_API.client.create(WEB_API.class);
+        Call<ResponseApi> call = apiService.deal(tawaran_id,sessionManager.getUid(),"ant0k");
+
+        //proses call
+        call.enqueue(new Callback<ResponseApi>() {
+            @Override
+            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+                progressDialog.dismiss();
+                openRedirectDialog();
+            }
+
+
+            @Override
+            public void onFailure(Call<ResponseApi> call, Throwable t) {
+                // Log error
+                Log.e("cok", "onFailure: ", t.fillInStackTrace());
+                Toast.makeText(context, "Connection Failed", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }

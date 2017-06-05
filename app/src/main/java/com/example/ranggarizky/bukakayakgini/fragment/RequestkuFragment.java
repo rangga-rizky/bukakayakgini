@@ -378,13 +378,10 @@ public class RequestkuFragment extends Fragment {
         };
         getActivity().registerReceiver(receiver, filter);
         loadData();
-        ((MainActivity) getActivity())
-                .setActionBarTitle("REQUESTKU");
 
-
-        AppBarLayout.LayoutParams params =
-                (AppBarLayout.LayoutParams) ((MainActivity) getActivity()).getToolbar().getLayoutParams();
-        params.setScrollFlags(0);
+      //  AppBarLayout.LayoutParams params =
+        //        (AppBarLayout.LayoutParams) ((MainActivity) getActivity()).getToolbar().getLayoutParams();
+       // params.setScrollFlags(0);
         loadNotif();
 
     }

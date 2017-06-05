@@ -22,7 +22,20 @@
             app:elevation="0dp"
             android:theme="@style/AppToolbar"
             app:titleTextAppearance="@style/ToolbarTitle"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BUKAKAYAKGINI"
+                android:layout_gravity="center"
+                android:id="@+id/toolbar_title"
+                android:letterSpacing="0.1"
+                android:textSize="16sp"
+                android:textColor="@color/title_font"/>-->
+
+
+        </android.support.v7.widget.Toolbar>
 
         <View
             android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.example.ranggarizky.bukakayakgini.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.ranggarizky.bukakayakgini.MainActivity;
 import com.example.ranggarizky.bukakayakgini.R;
 import com.example.ranggarizky.bukakayakgini.adapter.RequestVerticalSquareRecyclerAdapter;
 import com.example.ranggarizky.bukakayakgini.adapter.TawaranKuRecyclerAdapter;
@@ -48,6 +51,7 @@ public class TawarankuFragment extends Fragment {
     ProgressBar progressBar;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
+    int toolbarMarginOffset = 0;
     private  ArrayList<RequestObject> datas;
     private  TawaranKuRecyclerAdapter mAdapter;
     private SessionManager sessionManager;
@@ -82,7 +86,14 @@ public class TawarankuFragment extends Fragment {
                 loadData();
             }
         });
+
+
         return view;
+    }
+
+
+    private int dp(int inPixels){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, inPixels, getResources().getDisplayMetrics());
     }
 
     private void loadData(){
@@ -128,4 +139,10 @@ public class TawarankuFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
 }
