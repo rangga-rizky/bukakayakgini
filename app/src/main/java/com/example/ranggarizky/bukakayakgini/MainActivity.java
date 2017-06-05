@@ -21,12 +21,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ranggarizky.bukakayakgini.fragment.HomeFragment;
 import com.example.ranggarizky.bukakayakgini.fragment.MenawarkanBarangFragment;
 import com.example.ranggarizky.bukakayakgini.fragment.ProfileFragment;
-import com.example.ranggarizky.bukakayakgini.fragment.RequestkuFragment;
-import com.example.ranggarizky.bukakayakgini.fragment.SettingFragment;
-import com.example.ranggarizky.bukakayakgini.fragment.TawaranFragment;
-import com.example.ranggarizky.bukakayakgini.model.ResponseNotif;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.util.API;
 import com.example.ranggarizky.bukakayakgini.util.Base64Converter;
@@ -113,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
     private void setupFragment(){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, new RequestkuFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
     }
 
     @Override
@@ -144,10 +141,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
         invalidateOptionsMenu();
-        if (id == R.id.nav_requestku) {
-            fragment = new RequestkuFragment();
-        } else if (id == R.id.nav_request_lain) {
+         if (id == R.id.nav_request_lain) {
             fragment = new MenawarkanBarangFragment();
+        }
+        else if (id == R.id.nav_home) {
+            fragment = new HomeFragment();
         }
         else if (id == R.id.nav_bantuan) {
             Intent intent = new Intent(this,WebViewActivity.class);

@@ -50,20 +50,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nested"
-
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_above="@+id/footer"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -333,38 +325,33 @@
                         android:visibility="gone">
                     </android.support.v7.widget.RecyclerView>
 
-                    <LinearLayout
-                        android:id="@+id/footer"
-                        android:layout_marginTop="5dp"
-                        android:paddingLeft="16dp"
-                        android:paddingRight="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/btnTawar2"
-                            android:visibility="gone"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/primary_rounded_button"
-                            android:text="Tawarkan Barang Sekarang"
-                            android:textColor="@color/white" />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
             </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>
 
+        <LinearLayout
+            android:id="@+id/footer"
+            app:layout_behavior="com.example.ranggarizky.bukakayakgini.util.FixedBottomViewBehavior"
+            android:padding="16dp"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <Button
+                android:id="@+id/btnTawar2"
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/primary_rounded_button"
+                android:text="Tawarkan Barang Sekarang"
+                android:textColor="@color/white" />
 
-
-
-    </RelativeLayout>
+        </LinearLayout>
 
 
 

@@ -54,11 +54,9 @@
         android:layout_above="@+id/footer"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-
-
+        >
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -327,11 +325,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/light_grey"/>
-            
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="205dp" />
-            
+                android:layout_height="210dp" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
@@ -339,12 +337,11 @@
     <LinearLayout
         android:id="@+id/footer"
         android:padding="16dp"
+        android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.example.ranggarizky.bukakayakgini.util.FixedBottomViewBehavior"
         android:orientation="horizontal">
-
 
 
         <Button
@@ -363,10 +360,7 @@
             android:background="@drawable/primary_rounded_button"
             android:text="Lihat Tawaran"
             android:visibility="gone"
-            android:textColor="@color/white"/>
+             android:textColor="@color/white"/>
     </LinearLayout>
-
-
-
 
 </android.support.design.widget.CoordinatorLayout>

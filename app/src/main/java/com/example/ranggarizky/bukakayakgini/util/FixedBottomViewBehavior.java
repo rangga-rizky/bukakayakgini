@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 /**
  * Created by RanggaRizky on 6/5/2017.
@@ -19,6 +20,8 @@ public class FixedBottomViewBehavior  extends CoordinatorLayout.Behavior<View> {
     public FixedBottomViewBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
+
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
@@ -37,4 +40,5 @@ public class FixedBottomViewBehavior  extends CoordinatorLayout.Behavior<View> {
         }
         return false;
     }
+
 }
