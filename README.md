@@ -1,1 +1,3 @@
-"# My project's README" 
+# BukaKayakGini
+
+![Screenshot](image.JPG) 
