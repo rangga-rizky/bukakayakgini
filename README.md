@@ -1,3 +1,3 @@
 # BukaKayakGini
 
-![Screenshot](image.JPG) 
+![Screenshot](image.jpg) 
