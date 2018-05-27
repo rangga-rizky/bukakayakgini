@@ -2,6 +2,7 @@ package com.example.ranggarizky.bukakayakgini;
 
 import android.*;
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -70,6 +72,8 @@ public class InputRequestActivity extends AppCompatActivity {
     EditText editBudget;
     @BindView(R.id.editDeskripsi)
     EditText editDeskripsi;
+    @BindView(R.id.jumlah)
+    Button txt_jumlah;
     @BindView(R.id.imgFoto)
     ImageView imgFoto;
     @BindView(R.id.cbekas)
@@ -266,12 +270,12 @@ public class InputRequestActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnRequest)
     public void btnRequest(View view){
-        if(cbaru.isChecked()){
+        if(cbaru.isChecked() && cbekas.isChecked()){
+            kondisi = "2";
+        }else  if(cbaru.isChecked()){
             kondisi = "1";
         }else if(cbekas.isChecked()){
             kondisi = "0";
-        }else if(cbaru.isChecked() && cbekas.isChecked()){
-            kondisi = "2";
         }
 
         if(Validation.checkEmpty(wrapperNamabarang,editNama) && Validation.checkEmpty(wrapperBudget,editBudget) &&
@@ -297,6 +301,7 @@ public class InputRequestActivity extends AppCompatActivity {
                     RequestBody nama = RequestBody.create(MediaType.parse("multipart/form-data"), editNama.getText().toString());
                     RequestBody deskripsi = RequestBody.create(MediaType.parse("multipart/form-data"), editDeskripsi.getText().toString());
                     RequestBody harga = RequestBody.create(MediaType.parse("multipart/form-data"), editBudget.getText().toString());
+                    RequestBody jumlah = RequestBody.create(MediaType.parse("multipart/form-data"), txt_jumlah.getText().toString());
                     RequestBody kategori  = RequestBody.create(MediaType.parse("multipart/form-data"), id_kategori);
                     RequestBody kondisiBarang  = RequestBody.create(MediaType.parse("multipart/form-data"), kondisi);
                     RequestBody secret  = RequestBody.create(MediaType.parse("multipart/form-data"), "ant0k");
@@ -311,6 +316,7 @@ public class InputRequestActivity extends AppCompatActivity {
                             kategori,
                             secret,
                             kondisiBarang,
+                            jumlah,
                             body
                     );
 
@@ -327,7 +333,7 @@ public class InputRequestActivity extends AppCompatActivity {
                             else {
                                 if(response.body().getSuccess()!=null){
                                     Toast.makeText(getApplicationContext(),"Permintaan Berhasil di kirim",Toast.LENGTH_SHORT).show();
-                                    finish();
+                                    openSuccessDialog(response.body().getSaved().getId());
                                 }
                             }
 
@@ -347,6 +353,55 @@ public class InputRequestActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void openSuccessDialog(final String id){
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_confirm);
+        TextView txtJudul = (TextView) dialog.findViewById(R.id.txtJudul);
+        TextView txtDeskripsi = (TextView) dialog.findViewById(R.id.txtDeskripsi);
+        Button btnTerima = (Button) dialog.findViewById(R.id.btnTerima);
+        Button btnBatal = (Button) dialog.findViewById(R.id.btnBatal);
+        btnTerima.setText("OK, Mengerti");
+        txtJudul.setText("Request Berhasil");
+        txtDeskripsi.setText("Kamu akan dikabari melalui notif ketika ada pelapak menawarkan barang kepadamu.");
+        btnTerima.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                Intent intent = new Intent(getApplicationContext(), DetailRequestKuActivity.class);
+                intent.putExtra("id",id);
+
+                startActivity(intent);
+                finish();
+            }
+        });
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                dialog.dismiss();
+                Intent intent = new Intent(getApplicationContext(), DetailRequestKuActivity.class);
+                intent.putExtra("id",id);
+
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnBatal.setVisibility(View.GONE);
+        dialog.show();
+    }
+
+    @OnClick(R.id.btnPlus)
+    public void plusQty(View view){
+        txt_jumlah.setText(String.valueOf(Integer.valueOf(txt_jumlah.getText().toString()) + 1));
+    }
+
+    @OnClick(R.id.btnMinus)
+    public void minusQty(View view){
+        if(Integer.valueOf(txt_jumlah.getText().toString()) > 1){
+            txt_jumlah.setText(String.valueOf(Integer.valueOf(txt_jumlah.getText().toString()) - 1));
+        }
     }
 
 }

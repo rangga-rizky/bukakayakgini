@@ -36,21 +36,31 @@
         android:textColor="@color/black"
         android:text="Title Request" />
 
+        <ImageView
+            android:id="@+id/iconTawar"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_below="@+id/txtTitle"
+            android:layout_toEndOf="@+id/imgBarang"
+            android:layout_toRightOf="@+id/imgBarang"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/jml_tawaran"/>
+
     <TextView
-        android:id="@+id/txtKategori"
-        android:layout_marginLeft="12dp"
-        android:layout_toEndOf="@+id/imgBarang"
-        android:layout_toRightOf="@+id/imgBarang"
+        android:id="@+id/txtJumlahTawaran"
+        android:layout_toEndOf="@+id/iconTawar"
+        android:layout_marginLeft="2dp"
         android:layout_toStartOf="@+id/txtDate"
         android:layout_toLeftOf="@+id/txtDate"
         android:layout_marginTop="2dp"
         android:layout_below="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title Request"
+        android:text="Tawaran: 4"
         android:textSize="11sp"
         android:textColor="@color/grey"
-        />
+        android:layout_toRightOf="@+id/iconTawar" />
 
     <TextView
         android:id="@+id/txtDate"
@@ -75,8 +85,9 @@
         android:paddingTop="3dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
+        android:layout_centerVertical="true"
         android:textSize="10sp"
-        android:textColor="@color/grey"
+        android:textColor="@color/white"
         android:layout_alignParentRight="true" />
 
     </RelativeLayout>

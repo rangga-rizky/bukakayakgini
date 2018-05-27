@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.example.ranggarizky.bukakayakgini.FirstActivity;
 import com.example.ranggarizky.bukakayakgini.MainActivity;
+import com.example.ranggarizky.bukakayakgini.ProfileActivity;
 import com.example.ranggarizky.bukakayakgini.R;
+import com.example.ranggarizky.bukakayakgini.SubscribeCategoryActivity;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponsePermintaanSingle;
 import com.example.ranggarizky.bukakayakgini.model.ResponseProfile;
@@ -64,13 +66,9 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
-
-
-
     public ProfileFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,10 +109,7 @@ public class ProfileFragment extends Fragment {
                     txtJumlahMenawarkan.setText(apiresponse.getData().getNumSupply() + " kali menawarkan barang");
 
                 }
-
-
             }
-
 
             @Override
             public void onFailure(Call<ResponseProfile> call, Throwable t) {
@@ -138,17 +133,12 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                if(response.body()!= null){
-
                         Picasso.with(getActivity())
                                 .load(response.body().getUser().getAvatar())
                                 .placeholder(R.drawable.dummy)
                                 .into(imgAva);
                }
-
-
-
             }
-
 
             @Override
             public void onFailure(Call<ResponseObject> call, Throwable t) {
@@ -160,15 +150,14 @@ public class ProfileFragment extends Fragment {
     @OnClick(R.id.btnLogout)
     public void logout(View view){
         sessionManager.setLogin(false);
-        startActivity(new Intent(getActivity(), FirstActivity.class));
+        Intent intent = new Intent(getActivity(), FirstActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         getActivity().finish();
     }
 
-    public void onResume(){
-        super.onResume();
-        ((MainActivity) getActivity())
-                .setActionBarTitle("PROFIL SAYA");
-
+    @OnClick(R.id.btnInterest)
+    public void btnInterest(View view){
+        startActivity(new Intent(getActivity(), SubscribeCategoryActivity.class));
     }
-
 }

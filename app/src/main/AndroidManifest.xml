@@ -42,7 +42,7 @@
             android:name=".DetailRequestKuActivity"
             android:label="DETAIL REQUEST" />
         <activity
-            android:name=".DetailRequestJoinActivity"
+            android:name=".DetailRequestCopyActivity"
             android:label="DETAIL REQUEST" />
         <activity
             android:name=".MainActivity"
@@ -56,7 +56,7 @@
             android:name=".FilterTawaranActivity"
             android:label="FILTER" />
         <activity
-            android:name=".DetailTawaranActivity"
+            android:name=".DetailBarangActivity"
             android:label="DETAIL TAWARAN" />
         <activity
             android:name=".NotificationActivity"
@@ -73,7 +73,23 @@
             android:label="REQUEST JOIN" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".DetailTawarankuActivity" />
-        <activity android:name=".BeforeRequestActivity"></activity>
+        <activity android:name=".BeforeRequestActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="PROFILE SAYA" />
+        <activity
+            android:name=".PermintaanListActivity"
+            android:label="PERMINTAAN" />
+        <activity
+            android:name=".SubscribeCategoryActivity"
+            android:label="SUBSCRIBE KATEGORI" />
+        <activity
+            android:name=".InputCopyActivity"
+            android:label="REQUEST KAYAK GINI" />
+        <activity android:name=".DetailTawaranActivity" />
+        <activity
+            android:name=".TrendingRequestListActivity"
+            android:label="TRENDING REQUEST"></activity>
     </application>
 
 </manifest>

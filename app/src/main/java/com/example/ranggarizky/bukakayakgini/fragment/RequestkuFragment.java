@@ -131,7 +131,7 @@ public class RequestkuFragment extends Fragment {
         swipe.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         WEB_API apiService = WEB_API.client.create(WEB_API.class);
-        Call<ResponsePermintaan> call = apiService.getPermintaanku(sessionManager.getUid(),"ant0k","1","10");
+        Call<ResponsePermintaan> call = apiService.getPermintaanku(sessionManager.getUid(),"ant0k","1","20");
 
         //proses call
         call.enqueue(new Callback<ResponsePermintaan>() {
@@ -270,7 +270,7 @@ public class RequestkuFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_notif : startActivity(new Intent(getActivity(), NotificationActivity.class));break;
-            case R.id.action_filter : CharSequence colors[] = new CharSequence[] {"Sedang Ditawari", "Menunggu Tawaran","Request Ditutup","Lihat Semua"};
+            case R.id.action_filter : CharSequence colors[] = new CharSequence[] {"Sedang Ditawari", "Menunggu Tawaran","Transaksi","Request Ditutup","Lihat Semua"};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Filter Berdasarkan");
@@ -278,10 +278,11 @@ public class RequestkuFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
-                            case 0:loadByStatus("1","1");break;
-                            case 1:loadByStatus("1","0");break;
-                            case 2:loadByStatus("0","0");break;
-                            case 3:loadData();break;
+                            case 0:loadByStatus("3");break;
+                            case 1:loadByStatus("1");break;
+                            case 2:loadByStatus("2");break;
+                            case 3:loadByStatus("0");break;
+                            case 4:loadData();break;
                         }
                     }
                 });
@@ -291,12 +292,12 @@ public class RequestkuFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadByStatus(String status,String status_tawar){
+    private void loadByStatus(String status){
 
         swipe.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         WEB_API apiService = WEB_API.client.create(WEB_API.class);
-        Call<ResponsePermintaan> call = apiService.getPermintaanku(status,status_tawar,sessionManager.getUid(),"ant0k","1","10");
+        Call<ResponsePermintaan> call = apiService.getPermintaanku(status,sessionManager.getUid(),"ant0k","1","10");
 
         //proses call
         call.enqueue(new Callback<ResponsePermintaan>() {

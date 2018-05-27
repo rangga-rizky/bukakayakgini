@@ -47,35 +47,63 @@
             <RelativeLayout
                 android:id="@+id/btnFilter"
                 android:layout_weight="0.5"
+                android:padding="16dp"
                 android:background="@drawable/border_rectangle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_margin="16dp"
+                <LinearLayout
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/font"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Filter"/>
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginTop="1dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/filter_sub" />
+
+                    <TextView
+                        android:id="@+id/filter"
+                        android:gravity="center"
+                        android:textColor="@color/font"
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Filter"/>
+                </LinearLayout>
 
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:padding="16dp"
                 android:id="@+id/btnUrutkan"
                 android:background="@drawable/border_rectangle"
                 android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_margin="16dp"
-                    android:gravity="center"
-                    android:textColor="@color/font"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Urutkan"/>
+                <LinearLayout
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginTop="1dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/sort" />
+
+                    <TextView
+
+                        android:textColor="@color/font"
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Urutkan"/>
+                </LinearLayout>
 
 
             </RelativeLayout>

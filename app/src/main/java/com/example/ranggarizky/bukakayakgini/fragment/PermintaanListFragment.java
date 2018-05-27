@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.ranggarizky.bukakayakgini.PermintaanListActivity;
 import com.example.ranggarizky.bukakayakgini.R;
 import com.example.ranggarizky.bukakayakgini.adapter.RequestAdapter;
 import com.example.ranggarizky.bukakayakgini.adapter.RequestSquareRecyclerAdapter;
@@ -93,7 +94,7 @@ public class PermintaanListFragment extends Fragment {
         recyclerView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         WEB_API apiService = WEB_API.client.create(WEB_API.class);
-        Call<ResponsePermintaan> call = apiService.getAllPermintaan("ant0k","1","50");
+        Call<ResponsePermintaan> call = apiService.getAllPermintaan("ant0k","1","1","50");
 
         //proses call
         call.enqueue(new Callback<ResponsePermintaan>() {

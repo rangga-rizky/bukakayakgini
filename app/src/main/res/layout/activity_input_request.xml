@@ -68,8 +68,55 @@
             </android.support.design.widget.TextInputLayout>
 
             <RelativeLayout
-                android:id="@+id/kategori"
+                android:id="@+id/qty"
                 android:layout_below="@+id/wrapperNamabarang"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/textqty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity"/>
+
+                <Button
+                    android:layout_toEndOf="@+id/textqty"
+                    android:layout_marginLeft="12dp"
+                    android:id="@+id/btnMinus"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_rectangle"
+                    android:text="-"
+                    android:layout_toRightOf="@+id/textqty" />
+
+                <Button
+                    android:id="@+id/jumlah"
+                    android:layout_width="45dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_rectangle"
+                    android:text="1"
+                    android:layout_toEndOf="@+id/btnMinus"
+                    android:layout_toRightOf="@+id/btnMinus" />
+
+                <Button
+                    android:id="@+id/btnPlus"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/border_rectangle"
+                    android:text="+"
+                    android:layout_toEndOf="@+id/jumlah"
+                    android:layout_toRightOf="@+id/jumlah" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/kategori"
+                android:layout_below="@+id/qty"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"
@@ -134,6 +181,7 @@
                     android:hint="Maksimal budget kamu" />
 
             </android.support.design.widget.TextInputLayout>
+
 
             <RelativeLayout
                 android:layout_marginLeft="3dp"

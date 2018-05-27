@@ -1,6 +1,7 @@
 package com.example.ranggarizky.bukakayakgini.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ranggarizky.bukakayakgini.DetailTawarankuActivity;
 import com.example.ranggarizky.bukakayakgini.R;
 import com.example.ranggarizky.bukakayakgini.fragment.BarangkuListFragment;
 import com.example.ranggarizky.bukakayakgini.model.BarangBukaLapak;
@@ -48,6 +51,8 @@ public class BarangBukaLapakRecyclerAdapter extends RecyclerView.Adapter<BarangB
         TextView txtHarga;
         @BindView(R.id.txtStok)
         TextView txtStok;
+        @BindView(R.id.utama)
+        RelativeLayout utama;
 
 
         public MyViewHolder(View view) {
@@ -104,6 +109,15 @@ public class BarangBukaLapakRecyclerAdapter extends RecyclerView.Adapter<BarangB
         }else{
             holder.txtTitle.setText(item.getName());
         }
+        holder.utama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailTawarankuActivity.class);
+                intent.putExtra("id",item.getId());
+                context.startActivity(intent);
+            }
+        });
+
         Picasso.with(context)
                 .load(item.getSmall_images().get(0))
                 .placeholder(R.drawable.dummy)

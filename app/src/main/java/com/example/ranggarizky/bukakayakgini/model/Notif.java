@@ -11,6 +11,10 @@ public class Notif {
     @Expose
     private String id;
 
+    @SerializedName("id_terkait")
+    @Expose
+    private String id_terkait;
+
     @SerializedName("content")
     @Expose
     private String content;
@@ -22,6 +26,18 @@ public class Notif {
     @SerializedName("status")
     @Expose
     private String status;
+
+    @SerializedName("other")
+    @Expose
+    private String other;
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public String getOther() {
+        return other;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -53,5 +69,13 @@ public class Notif {
 
     public String getStatus() {
         return status;
+    }
+
+    public void setId_terkait(String id_terkait) {
+        this.id_terkait = id_terkait;
+    }
+
+    public String getId_terkait() {
+        return id_terkait;
     }
 }

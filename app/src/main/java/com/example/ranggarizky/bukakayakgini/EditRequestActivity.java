@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -63,6 +64,8 @@ public class EditRequestActivity extends AppCompatActivity {
     TextView txtKategori;
     @BindView(R.id.editNama)
     EditText editNama;
+    @BindView(R.id.jumlah)
+    Button txt_jumlah;
     @BindView(R.id.editBudget)
     EditText editBudget;
     @BindView(R.id.editDeskripsi)
@@ -79,6 +82,8 @@ public class EditRequestActivity extends AppCompatActivity {
     TextInputLayout wrapperDeskripsi;
     @BindView(R.id.wrapperBudget)
     TextInputLayout wrapperBudget;
+    @BindView(R.id.btnRequest)
+    Button btnRequest;
     private File file;
     private Bitmap bitmap;
     private Uri filePath;
@@ -99,6 +104,7 @@ public class EditRequestActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        btnRequest.setText("UPDATE REQUEST");
         loadData();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED || ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, 1);
@@ -136,6 +142,7 @@ public class EditRequestActivity extends AppCompatActivity {
                             .placeholder(R.drawable.dummy)
                             .into(imgFoto);
 
+                    txt_jumlah.setText(apiresponse.getData().getJumlah());
 
                     if(apiresponse.getData().getKondisi().equals("1")){
                         cbaru.setChecked(true);
@@ -346,6 +353,7 @@ public class EditRequestActivity extends AppCompatActivity {
                     RequestBody nama = RequestBody.create(MediaType.parse("multipart/form-data"), editNama.getText().toString());
                     RequestBody deskripsi = RequestBody.create(MediaType.parse("multipart/form-data"), editDeskripsi.getText().toString());
                     RequestBody harga = RequestBody.create(MediaType.parse("multipart/form-data"), editBudget.getText().toString());
+                    RequestBody jumlah = RequestBody.create(MediaType.parse("multipart/form-data"), txt_jumlah.getText().toString());
                     RequestBody kategori  = RequestBody.create(MediaType.parse("multipart/form-data"), id_kategori);
                     RequestBody kondisiBarang  = RequestBody.create(MediaType.parse("multipart/form-data"), kondisi);
                     RequestBody secret  = RequestBody.create(MediaType.parse("multipart/form-data"), "ant0k");
@@ -359,6 +367,7 @@ public class EditRequestActivity extends AppCompatActivity {
                             kategori,
                             secret,
                             kondisiBarang,
+                            jumlah,
                             body
                     );
 
@@ -400,5 +409,17 @@ public class EditRequestActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @OnClick(R.id.btnPlus)
+    public void plusQty(View view){
+        txt_jumlah.setText(String.valueOf(Integer.valueOf(txt_jumlah.getText().toString()) + 1));
+    }
+
+    @OnClick(R.id.btnMinus)
+    public void minusQty(View view){
+        if(Integer.valueOf(txt_jumlah.getText().toString()) > 1){
+            txt_jumlah.setText(String.valueOf(Integer.valueOf(txt_jumlah.getText().toString()) - 1));
+        }
     }
 }

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            app:expandedTitleTextAppearance="@style/TransparentText"
+            app:titleTextAppearance="@style/TransparentText"
+            app:collapsedTitleTextAppearance="@style/TransparentText"
+            android:id="@+id/toolbar_layout"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/AppToolbarDetail"
+            android:elevation="0dp"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:contentScrim="?attr/colorPrimary">
+
+            <ImageView
+                android:id="@+id/imgBarang"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/dummy"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/background_toolbar_translucent"
+                android:layout_gravity="center_horizontal|top"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:titleTextAppearance="@style/ToolbarTitle"
+                android:theme="@style/AppToolbarDetail"
+                android:elevation="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_above="@+id/footer"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_marginRight="5dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/font"
+                    android:textStyle="bold"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@+id/txtTitle"
+                    android:textSize="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+
+                <TextView
+                    android:id="@+id/txtDeskripsi"
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@+id/txtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="16dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/iconKategori"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/kategori_pink" />
+
+                <TextView
+                    android:layout_toEndOf="@+id/iconKategori"
+                    android:id="@+id/kategori"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Kategori"
+                    android:layout_toRightOf="@+id/iconKategori" />
+
+                <TextView
+                    android:id="@+id/txtKategori"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@+id/budget"
+                    android:layout_below="@+id/spesifikasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/budget" />
+
+                <ImageView
+                    android:layout_below="@+id/kategori"
+                    android:id="@+id/iconKondisi"
+                    android:layout_marginTop="9dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/kondisi_pink" />
+
+
+                <TextView
+                    android:id="@+id/kondisi"
+                    android:layout_toEndOf="@+id/iconKondisi"
+                    android:layout_below="@+id/kategori"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Kondisi"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/iconKondisi" />
+
+                <TextView
+                    android:id="@+id/txtKondisi"
+                    android:textStyle="bold"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@+id/budget"
+                    android:layout_below="@+id/kategori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/budget" />
+
+                <ImageView
+                    android:layout_below="@+id/kondisi"
+                    android:id="@+id/iconBudget"
+                    android:layout_marginTop="9dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/price" />
+
+
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_below="@+id/kondisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Maksimal Budget"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@+id/iconBudget"
+                    android:layout_toRightOf="@+id/iconBudget" />
+
+                <TextView
+                    android:id="@+id/txtbudget"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@id/budget"
+                    android:layout_below="@+id/kondisi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/kategori" />
+
+                <ImageView
+                    android:layout_below="@+id/budget"
+                    android:id="@+id/iconJumlah"
+                    android:layout_marginTop="9dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/tawaran_pink" />
+
+
+                <TextView
+                    android:id="@+id/jumlah"
+                    android:layout_below="@+id/budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:text="Jumlah"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@+id/iconJumlah"
+                    android:layout_toRightOf="@+id/iconJumlah" />
+
+                <TextView
+                    android:id="@+id/txtJumlah"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@id/budget"
+                    android:layout_below="@+id/txtbudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/font"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/kategori" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/requester"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Requester"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_below="@+id/requester"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/imgAva"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/dummy"/>
+
+                <TextView
+                    android:id="@+id/txtNama"
+                    android:layout_below="@+id/requester"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toEndOf="@+id/imgAva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/title_font"
+                    android:layout_toRightOf="@+id/imgAva" />
+
+                <TextView
+                    android:id="@+id/txtKota"
+                    android:layout_below="@+id/txtNama"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="12sp"
+                    android:layout_toEndOf="@+id/imgAva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/imgAva" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_grey"/>
+
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="210dp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btnJoin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_reverse_rounded_button"
+            android:text="REQUEST KAYAK GINI"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

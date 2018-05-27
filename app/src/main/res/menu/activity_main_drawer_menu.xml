@@ -3,15 +3,6 @@
 
     <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/requestku"
-            android:title="Beranda" />
-
-        <item
-            android:id="@+id/nav_request_lain"
-            android:icon="@drawable/tawar"
-            android:title="Menawarkan Barang" />
 
         <item
             android:id="@+id/nav_profile"

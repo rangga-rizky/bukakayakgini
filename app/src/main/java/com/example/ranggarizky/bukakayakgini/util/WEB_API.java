@@ -2,23 +2,27 @@ package com.example.ranggarizky.bukakayakgini.util;
 
 
 import com.example.ranggarizky.bukakayakgini.model.Join;
+import com.example.ranggarizky.bukakayakgini.model.Kategori;
 import com.example.ranggarizky.bukakayakgini.model.RequestObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponseApi;
 import com.example.ranggarizky.bukakayakgini.model.ResponseCategory;
 import com.example.ranggarizky.bukakayakgini.model.ResponseCity;
 import com.example.ranggarizky.bukakayakgini.model.ResponseJoin;
+import com.example.ranggarizky.bukakayakgini.model.ResponseKategori;
 import com.example.ranggarizky.bukakayakgini.model.ResponseNotif;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponsePermintaan;
 import com.example.ranggarizky.bukakayakgini.model.ResponsePermintaanSingle;
 import com.example.ranggarizky.bukakayakgini.model.ResponseProfile;
 import com.example.ranggarizky.bukakayakgini.model.ResponseProvinsi;
+import com.example.ranggarizky.bukakayakgini.model.ResponseSingleTawaran;
 import com.example.ranggarizky.bukakayakgini.model.ResponseTawaran;
 import com.example.ranggarizky.bukakayakgini.model.Tawaran;
 import com.example.ranggarizky.bukakayakgini.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
@@ -69,6 +73,7 @@ public interface WEB_API {
                                                @Part("kategori") RequestBody kategori,
                                                @Part("secret") RequestBody secret,
                                                @Part("kondisi") RequestBody kondisi,
+                                               @Part("jumlah") RequestBody jumlah,
                                                @Part MultipartBody.Part file);
 
     @Multipart
@@ -79,7 +84,21 @@ public interface WEB_API {
                                               @Part("kategori") RequestBody kategori,
                                               @Part("secret") RequestBody secret,
                                               @Part("kondisi") RequestBody kondisi,
+                                              @Part("jumlah") RequestBody jumlah,
                                               @Part MultipartBody.Part file);
+
+    @Multipart
+    @POST("demand/storeCopy")
+    public Call<ResponseApi> copyPermintaan(  @Part("id_buyer") RequestBody  id_buyer ,
+                                               @Part("id_asli") RequestBody id_asli,
+                                              @Part("nama") RequestBody nama ,
+                                               @Part("deskripsi") RequestBody deskripsi,
+                                               @Part("harga") RequestBody harga,
+                                               @Part("kategori") RequestBody kategori,
+                                               @Part("secret") RequestBody secret,
+                                               @Part("kondisi") RequestBody kondisi,
+                                               @Part("jumlah") RequestBody jumlah,
+                                               @Part MultipartBody.Part file);
 
 
 
@@ -110,7 +129,6 @@ public interface WEB_API {
 
     @GET("demand/fetchByUser")
     public Call<ResponsePermintaan> getPermintaanku(@Query("status") String status,
-                                                    @Query("status_tawar") String status_tawar,
                                                     @Query("id_user") String user_id,
                                                     @Query("secret") String secret,
                                                     @Query("showSupplies") String showSupplies,
@@ -132,6 +150,7 @@ public interface WEB_API {
     @GET("demand/fetchAll")
     public Call<ResponsePermintaan> getAllPermintaan(@Query("secret") String secret,
                                                      @Query("status ") String status ,
+                                                     @Query("showSupplies") String showSupplies,
                                                      @Query("limit") String limit);
 
 
@@ -140,6 +159,22 @@ public interface WEB_API {
                                                  @Query("secret") String secret,
                                                  @Query("showSupplies") String showSupplies,
                                                  @Query("limit") String limit);
+
+    @GET("demand/fetchBySeller")
+    public Call<ResponsePermintaan> fetchInterestRequest(@Query("id_seller") String id_seller,
+                                                 @Query("secret") String secret,
+                                                 @Query("showSupplies") String showSupplies,
+                                                 @Query("limit") String limit);
+
+    @GET("demand/fetchTrending")
+    public Call<ResponsePermintaan> fetchTrending( @Query("secret") String secret,
+                                                         @Query("limit") String limit);
+
+    @GET("demand/fetchChild")
+    public Call<ResponsePermintaan> fetchChild( @Query("id_demand") String id_demand,
+                                                @Query("secret") String secret,
+                                                @Query("showSupplies") String showSupplies,
+                                                   @Query("limit") String limit);
 
     @GET("demand/search")
     public Call<ResponsePermintaan> searchDemand(@Query("keyword") String keyword,
@@ -152,6 +187,11 @@ public interface WEB_API {
     public Call<ResponseTawaran> fetchSupplyByDemand(@Query("id_demand") String id_request,
                                                      @Query("secret") String secret,
                                                      @Query("limit") String limit);
+
+    @GET("supply/fetchByDemand")
+    public Call<ResponseTawaran> fetchSupplySelected(@Query("id_demand") String id_request,
+                                                     @Query("secret") String secret,
+                                                     @Query("status") String status);
 
     @GET("supply/fetchByDemand")
     public Call<ResponseTawaran> fetchSupplyByDemand(@Query("id_demand") String id_request,
@@ -230,5 +270,31 @@ public interface WEB_API {
     public Call<ResponseApi> deal(@Field("id_supply") String id_supply ,
                                                  @Field("id_buyer") String id_buyer ,
                                                  @Field("secret") String secret);
+
+    @FormUrlEncoded
+    @POST("category/subscribe")
+    public Call<ResponseApi> subscribe(@Field("id_seller") String id_seller  ,
+                                  @Field("kategori") String kategori,
+                                  @Field("secret") String secret);
+
+    @FormUrlEncoded
+    @POST("category/unsubscribe")
+    public Call<ResponseApi> unsubscribe(@Field("id_seller") String id_seller  ,
+                                       @Field("kategori") String kategori,
+                                       @Field("secret") String secret);
+
+   @GET("category/fetchBySeller")
+    public Call<ResponseKategori> getSubscribebySeller(@Query("id_seller") String id_seller  ,
+                                                       @Query("secret") String secret);
+
+    @GET("supply/fetch")
+    public Call<ResponseSingleTawaran> getSupplybyID(@Query("id_supply") String id_supply  ,
+                                                     @Query("secret") String secret);
+
+    @GET("supply/checkTransInBL")
+    public Call<ResponseApi> checkTransInBL(@Query("id_buyer") String id_buyer  ,
+                                                     @Query("token") String token,
+                                                 @Query("secret") String secret);
+
 
 }

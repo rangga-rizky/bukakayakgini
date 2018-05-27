@@ -13,6 +13,17 @@ public class ResponseApi {
     @Expose
     private String success;
 
+    @SerializedName("saved")
+    @Expose
+    private RequestObject saved;
+
+    public void setSaved(RequestObject saved) {
+        this.saved = saved;
+    }
+
+    public RequestObject getSaved() {
+        return saved;
+    }
 
     public void setSuccess(String success) {
         this.success = success;

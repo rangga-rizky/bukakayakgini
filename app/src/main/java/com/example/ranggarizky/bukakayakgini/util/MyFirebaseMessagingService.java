@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.ranggarizky.bukakayakgini.DetailRequestActivity;
+import com.example.ranggarizky.bukakayakgini.DetailTawaranActivity;
 import com.example.ranggarizky.bukakayakgini.MainActivity;
 import com.example.ranggarizky.bukakayakgini.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -31,19 +33,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         SessionManager sessionManager =  new SessionManager(getApplicationContext());
         if(sessionManager.isLogin()){
             if(remoteMessage.getData().get("message") != null){
-                sendNotification( remoteMessage.getData().get("message"));
-                Intent intent = new Intent();
-                intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-                intent.setAction("com.ranggarizky.bukaKayakGini");
-                sendBroadcast(intent);
+                if(remoteMessage.getData().get("id") != null && remoteMessage.getData().get("other") != null){
+
+                    sendNotification( remoteMessage.getData().get("message"),remoteMessage.getData().get("id") ,remoteMessage.getData().get("other"));
+                    Intent intent = new Intent();
+                    intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                    intent.setAction("com.ranggarizky.bukaKayakGini");
+                    sendBroadcast(intent);
+                }
             }
         }
     }
 
-    private void sendNotification(String messageBody) {
+    private void sendNotification(String messageBody,String id,String other) {
 
         Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent;
+        if(other.equals("newproductsub") ||other.equals("demand_expired")  ){
+            intent = new Intent(this, DetailRequestActivity.class);
+            intent.putExtra("id",id);;
+        }else{
+            intent = new Intent(this, DetailTawaranActivity.class);
+            intent.putExtra("id",id);
+        }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -56,6 +69,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(messageBody))
                 .setContentIntent(pendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

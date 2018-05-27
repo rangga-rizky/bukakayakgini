@@ -59,6 +59,7 @@
 
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/txtTitle"
             android:layout_below="@+id/imgBarang"
             android:layout_margin="8dp"

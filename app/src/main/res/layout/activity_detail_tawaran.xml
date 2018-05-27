@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:elevation="0dp"
-            android:theme="@style/AppToolbar"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:theme="@style/AppToolbarDetail"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             app:contentScrim="?attr/colorPrimary">
 
 
@@ -59,11 +59,17 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 app:titleTextAppearance="@style/ToolbarTitle"
-                android:theme="@style/AppToolbar"
+                android:theme="@style/AppToolbarDetail"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_width="match_parent"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/background_toolbar_translucent"
+                android:layout_gravity="center_horizontal|top"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -74,13 +80,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btnLihatTawaran"
+
+             android:background="@color/white"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
                 <RelativeLayout
                     android:padding="16dp"

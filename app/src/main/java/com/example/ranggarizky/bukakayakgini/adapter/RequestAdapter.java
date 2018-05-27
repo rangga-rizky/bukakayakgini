@@ -42,10 +42,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         TextView txtTitle;
         @BindView(R.id.txtDate)
         TextView txtDate;
+        @BindView(R.id.txtJumlahTawaran)
+        TextView txtJumlahTawaran;
         @BindView(R.id.txtStatus)
         TextView txtStatus;
-        @BindView(R.id.txtKategori)
-        TextView txtKategori;
         @BindView(R.id.imgBarang)
         ImageView imgBarang;
 
@@ -87,13 +87,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final RequestObject item = datalist.get(position);
-        holder.txtDate.setText(item.getTanggal());
+        holder.txtDate.setText(item.getExpired_at());
         if(item.getNama().length() > 30){
             holder.txtTitle.setText(item.getNama().substring(0,25)+"...");
         }else{
             holder.txtTitle.setText(item.getNama());
         };
-        holder.txtKategori.setText(item.getKategori_detail().getNama());
+        holder.txtJumlahTawaran.setText("Jumlah tawaran : "+item.getSupplies().size());
         holder.layoutUtama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,21 +104,25 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
             }
         });
 
+
+        switch (item.getStatus()){
+            case "0" :
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_selesai));
+                holder.txtDate.setText("");break;
+            case "2" : holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_transaksi));break;
+            case "1" : if(item.getSupplies().size() > 0){
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_ditawari));break;
+                        }else{
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_menunggu));break;
+                         }
+        }
+
         holder.txtStatus.setText(item.getStatus_caption());
         Picasso.with(context)
                 .load(item.getFoto())
                 .placeholder(R.drawable.dummy)
                 .into(holder.imgBarang);
 
-
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
     }
 
     @Override

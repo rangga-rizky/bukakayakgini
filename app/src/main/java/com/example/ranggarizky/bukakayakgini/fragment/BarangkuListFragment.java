@@ -265,11 +265,7 @@ public class BarangkuListFragment extends Fragment {
 
                     @Override
                     public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
-                        try {
-                            Log.d("cekah",String.valueOf(response.errorBody().string()));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+
                         if((i-1) ==  (idBarangDipilih.size()-1)){
                             progressDialog.dismiss();
                             getActivity().finish();

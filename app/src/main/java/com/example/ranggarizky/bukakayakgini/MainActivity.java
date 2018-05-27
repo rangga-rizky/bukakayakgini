@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        invalidateOptionsMenu();
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
         sessionManager = new SessionManager(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -142,13 +143,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
         invalidateOptionsMenu();
-         if (id == R.id.nav_request_lain) {
+        /*if (id == R.id.nav_request_lain) {
             fragment = new MenawarkanBarangFragment();
-        }
-        else if (id == R.id.nav_home) {
-            fragment = new HomeFragment();
-        }
-        else if (id == R.id.nav_bantuan) {
+        }*/
+        if (id == R.id.nav_bantuan) {
             Intent intent = new Intent(this,WebViewActivity.class);
             intent.putExtra("url","http://bl.rendrahutama.my.id/public/panduan/");
             intent.putExtra("title","PUSAT BANTUAN");
@@ -161,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.nav_profile) {
-            fragment = new ProfileFragment();
+             startActivity(new Intent(this,ProfileActivity.class));
         }
         else if (id == R.id.nav_aplikasi) {
             final Dialog dialog = new Dialog(this);

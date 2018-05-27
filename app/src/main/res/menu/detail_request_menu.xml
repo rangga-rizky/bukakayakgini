@@ -1,9 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_item_close"
+        app:showAsAction="never"
+        android:icon="@drawable/share"
+        android:title="close" />
+
+    <item
+        android:id="@+id/menu_item_edit"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/pencil"
+        android:title="edit" />
     <item
         android:id="@+id/menu_item_share"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/share"
+        android:icon="@drawable/share_white"
         android:title="Share"
         android:actionProviderClass=
             "android.widget.ShareActionProvider" />

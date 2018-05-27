@@ -13,14 +13,21 @@ public class RequestObject {
     @Expose
     private String nama;
 
-
     @SerializedName("deskripsi")
     @Expose
     private String deskripsi;
 
+    @SerializedName("created_at")
+    @Expose
+    private String created_at;
+
     @SerializedName("jumlah_join")
     @Expose
     private String jumlah_join;
+
+    @SerializedName("jumlah")
+    @Expose
+    private String jumlah;
 
     @SerializedName("id_user")
     @Expose
@@ -62,9 +69,22 @@ public class RequestObject {
     @Expose
     private String tanggal ;
 
+    @SerializedName("sisa_waktu")
+    @Expose
+    private String expired_at ;
+
     @SerializedName("kategori_detail")
     @Expose
     private Kategori_detail kategori_detail ;
+
+    @SerializedName("induk")
+    @Expose
+    private RequestObject induk;
+
+    @SerializedName("user")
+    @Expose
+    private User user;
+
 
     @SerializedName("supplies")
     @Expose
@@ -83,7 +103,17 @@ public class RequestObject {
     @Expose
     private String status;
 
+    @SerializedName("jumlah_anak")
+    @Expose
+    private int jumlah_anak;
 
+    public void setJumlah_anak(int jumlah_anak) {
+        this.jumlah_anak = jumlah_anak;
+    }
+
+    public int getJumlah_anak() {
+        return jumlah_anak;
+    }
 
     public void setStatus(String status) {
         this.status = status;
@@ -93,8 +123,32 @@ public class RequestObject {
         return status;
     }
 
+    public void setJumlah(String jumlah) {
+        this.jumlah = jumlah;
+    }
+
+    public String getJumlah() {
+        return jumlah;
+    }
+
+    public void setExpired_at(String expired_at) {
+        this.expired_at = expired_at;
+    }
+
+    public String getExpired_at() {
+        return expired_at;
+    }
+
     public void setKategori_detail(Kategori_detail kategori_detail) {
         this.kategori_detail = kategori_detail;
+    }
+
+    public void setInduk(RequestObject induk) {
+        this.induk = induk;
+    }
+
+    public RequestObject getInduk() {
+        return induk;
     }
 
     public Kategori_detail getKategori_detail() {
@@ -219,5 +273,21 @@ public class RequestObject {
 
     public String getStatus_join() {
         return status_join;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getCreated_at() {
+        return created_at;
     }
 }

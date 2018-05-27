@@ -18,6 +18,15 @@ public class Kategori implements Serializable {
     @Expose
     private String name;
 
+
+    @SerializedName("nama")
+    @Expose
+    private String nama;
+
+    @SerializedName("kategori")
+    @Expose
+    private String kategori;
+
     @SerializedName("children")
     @Expose
     private ArrayList<Kategori> children = new ArrayList<>();
@@ -44,5 +53,21 @@ public class Kategori implements Serializable {
 
     public String getId() {
         return id;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
+    }
+
+    public String getKategori() {
+        return kategori;
     }
 }

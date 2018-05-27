@@ -32,7 +32,6 @@ import butterknife.OnClick;
 
 public class FirstActivity extends AppCompatActivity {
     private MyViewPagerAdapter myViewPagerAdapter;
-    private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
     int currentPage;
@@ -59,14 +58,12 @@ public class FirstActivity extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        layouts = new int[]{
+       layouts = new int[]{
                 R.layout.welcome_slide1,
                 R.layout.welcome_slide2,
                 R.layout.welcome_slide3};
 
 
-        addBottomDots(0);
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
@@ -90,24 +87,7 @@ public class FirstActivity extends AppCompatActivity {
         }, 50, 10000);
     }
 
-    private void addBottomDots(int currentPage) {
-        dots = new TextView[layouts.length];
 
-        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
-        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
-
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(colorsInactive[currentPage]);
-            dotsLayout.addView(dots[i]);
-        }
-
-        if (dots.length > 0)
-            dots[currentPage].setTextColor(colorsActive[currentPage]);
-    }
 
 
 
@@ -121,8 +101,6 @@ public class FirstActivity extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
-            addBottomDots(position);
-
 
         }
 

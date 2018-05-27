@@ -12,14 +12,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ranggarizky.bukakayakgini.DetailRequestActivity;
-import com.example.ranggarizky.bukakayakgini.DetailRequestJoinActivity;
 import com.example.ranggarizky.bukakayakgini.R;
 import com.example.ranggarizky.bukakayakgini.model.RequestObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.util.API;
 import com.squareup.picasso.Picasso;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,14 +39,20 @@ public class RequestVerticalSquareRecyclerAdapter extends RecyclerView.Adapter<R
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imgBarang)
         ImageView imgBarang;
-        @BindView(R.id.main_content)
-        RelativeLayout main_content;
         @BindView(R.id.imgAva)
         ImageView imgAva;
-        @BindView(R.id.txtNama)
-        TextView txtNama;
+        @BindView(R.id.main_content)
+        RelativeLayout main_content;
         @BindView(R.id.txtTitle)
         TextView txtTitle;
+        @BindView(R.id.txtNama)
+        TextView txtNama;
+        @BindView(R.id.txtHarga)
+        TextView txtHarga;
+        @BindView(R.id.txtStatus)
+        TextView txtStatus;
+        @BindView(R.id.txtJumlahTawaran)
+        TextView txtJumlahTawaran;
 
 
         public MyViewHolder(View view) {
@@ -71,12 +78,31 @@ public class RequestVerticalSquareRecyclerAdapter extends RecyclerView.Adapter<R
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final RequestObject item = verticalList.get(position);
-        holder.txtTitle.setText(item.getNama());
-        loadUser(item.getId_user(),holder.txtNama,holder.imgAva);
+        holder.txtStatus.setText(item.getStatus_caption());
+        switch (item.getStatus()){
+            case "0" : holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_selesai));break;
+            case "2" : holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_transaksi));break;
+            case "1" : if(item.getSupplies().size() > 0){
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_ditawari));break;
+            }else{
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_menunggu));break;
+            }
+        }
+        if(item.getNama().length() > 21){
+            holder.txtTitle.setText(item.getNama().substring(0,20)+"..");
+        }else{
+            holder.txtTitle.setText(item.getNama());
+        }
+        holder.txtJumlahTawaran.setText("x "+String.valueOf(item.getSupplies().size()));
+        NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
+        holder.txtHarga.setText("Rp"+rupiahFormat.format(Double.parseDouble(item.getHarga())));
         Picasso.with(context)
                 .load(item.getFoto())
                 .placeholder(R.drawable.dummy)
+                .resize(300,300)
+                .centerCrop()
                 .into(holder.imgBarang);
+        loadUser(item.getId_user(),holder.txtNama,holder.imgAva);
         holder.main_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,12 +122,13 @@ public class RequestVerticalSquareRecyclerAdapter extends RecyclerView.Adapter<R
             @Override
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if(response.body()!=null){
-                    txtName.setText(response.body().getUser().getUsername());
-                    Picasso.with(context)
-                            .load(response.body().getUser().getAvatar())
-                            .placeholder(R.drawable.dummy)
-                            .into(imgAva);
-
+                    if(response.body().getUser() != null){
+                        txtName.setText(response.body().getUser().getUsername());
+                        Picasso.with(context)
+                                .load(response.body().getUser().getAvatar())
+                                .placeholder(R.drawable.dummy)
+                                .into(imgAva);
+                    }
                 }
 
             }

@@ -47,7 +47,7 @@ public class TawaranListActivity extends AppCompatActivity {
     private String id_request;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    private TawaranRekomendasiAdapter mAdapter;
+    private TawaranRecyclerAdapter mAdapter;
 
     @BindView(R.id.empty_view)
     RelativeLayout empty_view;
@@ -102,7 +102,7 @@ public class TawaranListActivity extends AppCompatActivity {
 
                         recyclerView.setVisibility(View.VISIBLE);
                         empty_view.setVisibility(View.GONE);
-                        setAdapter(response.body().getData(),false);
+                        setAdapter(response.body().getData());
                     }else{
                         recyclerView.setVisibility(View.GONE);
                         empty_view.setVisibility(View.VISIBLE);
@@ -143,7 +143,7 @@ public class TawaranListActivity extends AppCompatActivity {
                     if(apiresponse.getData().size() >0) {
                         recyclerView.setVisibility(View.VISIBLE);
                         empty_view.setVisibility(View.GONE);
-                        setAdapter(response.body().getData(),true);
+                        setAdapter(response.body().getData());
                     }else{
                         recyclerView.setVisibility(View.GONE);
                         empty_view.setVisibility(View.VISIBLE);
@@ -164,24 +164,9 @@ public class TawaranListActivity extends AppCompatActivity {
         });
     }
 
-    private  void setAdapter(ArrayList<Tawaran> data,Boolean isFiltered){
-        //TawaranRecyclerAdapter mAdapter = new TawaranRecyclerAdapter(this,data,isFiltered);
-        //recyclerView.setAdapter(mAdapter);
-        if(isFiltered){
-            mAdapter = new TawaranRekomendasiAdapter(this,data,null);
-            recyclerView.setAdapter(mAdapter);
-        }else{
-            if(data.size() >= 5){
-                Tawaran header = data.get(0);
-                data.remove(0);
-                mAdapter = new TawaranRekomendasiAdapter(this,data,header);
-                recyclerView.setAdapter(mAdapter);
-
-            }else{
-                mAdapter = new TawaranRekomendasiAdapter(this,data,null);
-                recyclerView.setAdapter(mAdapter);
-            }
-        }
+    private  void setAdapter(ArrayList<Tawaran> data){
+        mAdapter = new TawaranRecyclerAdapter(this,data);
+        recyclerView.setAdapter(mAdapter);
     }
 
     private void loadDatawithFilter(String isTandai,String statusKondisi,String kota){
@@ -203,10 +188,9 @@ public class TawaranListActivity extends AppCompatActivity {
                     Log.e("tawaranlist", "no response");
                 } else {
                     if(apiresponse.getData().size() >0) {
-
                         recyclerView.setVisibility(View.VISIBLE);
                         empty_view.setVisibility(View.GONE);
-                        setAdapter(response.body().getData(),true);
+                        setAdapter(response.body().getData());
                     }else{
                         recyclerView.setVisibility(View.GONE);
                         empty_view.setVisibility(View.VISIBLE);
@@ -303,6 +287,10 @@ public class TawaranListActivity extends AppCompatActivity {
             //Log.e("jalan",isTandai+" "+statusKondisi+" "+kota);
             loadDatawithFilter(isTandai,statusKondisi,kota);
 
+        }
+
+        if(requestCode == 99 && resultCode == 99){
+            loadData();
         }
     }
 

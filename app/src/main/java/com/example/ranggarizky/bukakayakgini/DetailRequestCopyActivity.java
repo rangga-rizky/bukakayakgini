@@ -1,32 +1,23 @@
 package com.example.ranggarizky.bukakayakgini;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ranggarizky.bukakayakgini.model.Join;
 import com.example.ranggarizky.bukakayakgini.model.ResponseApi;
 import com.example.ranggarizky.bukakayakgini.model.ResponsePermintaanSingle;
-import com.example.ranggarizky.bukakayakgini.model.Tawaran;
 import com.example.ranggarizky.bukakayakgini.util.SessionManager;
-import com.example.ranggarizky.bukakayakgini.util.Validation;
 import com.example.ranggarizky.bukakayakgini.util.WEB_API;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailRequestJoinActivity extends AppCompatActivity {
+public class DetailRequestCopyActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.appBarLayout)
@@ -49,12 +40,14 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
     ImageView imgBarang;
     @BindView(R.id.txtTitle)
     TextView txtTitle;
-    @BindView(R.id.btnPopup)
-    ImageButton btnPopup;
+    @BindView(R.id.txtDate)
+    TextView txtDate;
     @BindView(R.id.btnJoin)
     Button btnJoin;
-    @BindView(R.id.txtStatus)
-    TextView txtStatus;
+    @BindView(R.id.txtNama)
+    TextView txtNama;
+    @BindView(R.id.txtKota)
+    TextView txtKota;
     @BindView(R.id.txtDeskripsi)
     TextView txtDeskripsi;
     @BindView(R.id.txtKondisi)
@@ -63,33 +56,33 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
     TextView txtbudget;
     @BindView(R.id.txtKategori)
     TextView txtKategori;
-    @BindView(R.id.txtTawaran)
-    TextView txtTawaran;
-    @BindView(R.id.txtUserJoin)
-    TextView txtUserJoin;
-
-    private String id,title;
+    @BindView(R.id.txtJumlah)
+    TextView txtJumlah;
+    @BindView(R.id.imgAva)
+    ImageView imgAva;
+    @BindView(R.id.footer)
+    LinearLayout footer;
+    private String id,induk_id;
     private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_request_ku);
+        setContentView(R.layout.activity_detail_request_copy);
         ButterKnife.bind(this);
         sessionManager =  new SessionManager(this);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         id = getIntent().getStringExtra("id");
-        btnPopup.setVisibility(View.GONE);
-
+        cekTrans();
         loadData();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("tes","tes");
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
@@ -113,8 +106,9 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
                 if (response.body() == null) {
                     Log.e("cok", "no response");
                 } else {
-                    title = apiresponse.getData().getNama();
-                    txtTitle.setText(title);
+                    txtTitle.setText(apiresponse.getData().getNama());
+                    txtDate.setText(apiresponse.getData().getTanggal());
+                    txtJumlah.setText(apiresponse.getData().getJumlah());
                     txtKategori.setText(apiresponse.getData().getKategori_detail().getNama());
                     if(apiresponse.getData().getKondisi().equals("0")){
                         txtKondisi.setText("Bekas");
@@ -124,27 +118,25 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
                     else{
                         txtKondisi.setText("Baru / Bekas");
                     }
-
-                    txtUserJoin.setText(apiresponse.getData().getJumlah_join());
-                    txtTawaran.setText(String.valueOf(apiresponse.getData().getSupplies().size()));
-                    txtStatus.setText(apiresponse.getData().getStatus_caption());
+                    if(apiresponse.getData().getInduk()!=null){
+                        induk_id = apiresponse.getData().getInduk().getId();
+                    }
                     NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
                     txtbudget.setText("Rp"+rupiahFormat.format(Double.parseDouble(apiresponse.getData().getHarga())));
                     txtDeskripsi.setText(apiresponse.getData().getDeskripsi());
+                    txtNama.setText(apiresponse.getData().getUser().getUsername());
+                    txtKota.setText(apiresponse.getData().getUser().getAddress().getCity());
                     Picasso.with(getApplicationContext())
                             .load(apiresponse.getData().getFoto())
                             .placeholder(R.drawable.dummy)
                             .into(imgBarang);
+                    Picasso.with(getApplicationContext())
+                            .load(apiresponse.getData().getUser().getAvatar())
+                            .placeholder(R.drawable.dummy)
+                            .into(imgAva);
                     if(!sessionManager.getUid().equals(apiresponse.getData().getId_user())){
                         if(!apiresponse.getData().getStatus().equals("0") ){
-                            if(response.body().getUserIsJoin().equals("0")){
-                                btnJoin.setVisibility(View.VISIBLE);
-                            }else{
-                                btnJoin.setVisibility(View.VISIBLE);
-                                btnJoin.setEnabled(false);
-                                btnJoin.setText("Kamu Sudah Request join pada request ini");
-                            }
-
+                            footer.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -162,65 +154,26 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
     }
 
 
-
-
-
     @OnClick(R.id.btnJoin)
     public  void join(View view){
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_join_request);
-        Button btnBatal = (Button) dialog.findViewById(R.id.btnBatal);
-        Button btnJoinDialog = (Button) dialog.findViewById(R.id.btnJoinDialog);
-        final EditText editpesan = (EditText) dialog.findViewById(R.id.editPesan);
-        final TextView txtTitleDialog = (TextView) dialog.findViewById(R.id.txtTitleDialog);
-        txtTitleDialog.setText("Request Join \" "+title+" \" ");
-        btnJoinDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insertJoin(editpesan.getText().toString());
-            }
-        });
-
-        btnBatal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-
-            }
-        });
-        dialog.show();
+        Intent intent = new Intent(this,InputCopyActivity.class);
+        intent.putExtra("id",id);
+        if(induk_id!=null){
+            intent.putExtra("induk_id",induk_id);
+        }else{
+            intent.putExtra("induk_id",id);
+        }
+        startActivity(intent);
     }
 
-    private  void insertJoin(String pesan){
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please Wait");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+    private  void cekTrans(){
         WEB_API apiService = WEB_API.client.create(WEB_API.class);
-        Join join = new Join();
-        join.setSecret("ant0k");
-        join.setId_buyer(sessionManager.getUid());
-        join.setId_demand(id);
-        join.setPesan(pesan);
-        Call<ResponseApi> call = apiService.join(join);
+        Call<ResponseApi> call = apiService.checkTransInBL(sessionManager.getUid(),sessionManager.getToken(),"ant0k");
 
         //proses call
         call.enqueue(new Callback<ResponseApi>() {
             @Override
             public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
-
-                if(response.body().getSuccess().equals("1")){
-                        progressDialog.dismiss();
-                        setResult(1);
-                        finish();
-                        Toast.makeText(getApplicationContext(), "Request berhasil ditambahkan", Toast.LENGTH_SHORT).show();
-                    }
-
 
             }
 
@@ -229,11 +182,10 @@ public class DetailRequestJoinActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseApi> call, Throwable t) {
                 // Log error
                 Log.e("cok", "onFailure: ", t.fillInStackTrace());
-                Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
             }
         });
     }
+
 
 
 }

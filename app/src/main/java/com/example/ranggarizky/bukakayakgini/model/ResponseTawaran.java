@@ -13,6 +13,7 @@ public class ResponseTawaran {
     @Expose
     private ArrayList<Tawaran> data = new ArrayList<>();
 
+
     @SerializedName("total")
     @Expose
     private String total;

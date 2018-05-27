@@ -88,6 +88,8 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
         holder.txtKategori.setText(item.getName());
         if(item.getChildren().size() == 0){
             holder.imgArrow.setVisibility(View.GONE);
+        }else{
+            holder.imgArrow.setVisibility(View.VISIBLE);
         }
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override

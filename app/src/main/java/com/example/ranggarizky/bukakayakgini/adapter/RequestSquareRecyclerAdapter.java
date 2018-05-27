@@ -11,11 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ranggarizky.bukakayakgini.DetailRequestJoinActivity;
-import com.example.ranggarizky.bukakayakgini.DetailRequestKuActivity;
+import com.example.ranggarizky.bukakayakgini.BeforeRequestActivity;
+import com.example.ranggarizky.bukakayakgini.DetailRequestCopyActivity;
 import com.example.ranggarizky.bukakayakgini.PrepareRequestActivity;
 import com.example.ranggarizky.bukakayakgini.R;
-import com.example.ranggarizky.bukakayakgini.model.BarangBukaLapak;
 import com.example.ranggarizky.bukakayakgini.model.RequestObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.util.API;
@@ -81,9 +80,13 @@ public class RequestSquareRecyclerAdapter extends RecyclerView.Adapter<RequestSq
         holder.main_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailRequestJoinActivity.class);
+                Intent intent = new Intent(context, DetailRequestCopyActivity.class);
                 intent.putExtra("id",item.getId());
-                ((PrepareRequestActivity)context).startActivityForResult(intent,1);
+                if(context instanceof PrepareRequestActivity ){
+                    ((PrepareRequestActivity)context).startActivityForResult(intent,1);
+                }else if(context instanceof BeforeRequestActivity){
+                    ((BeforeRequestActivity)context).startActivityForResult(intent,1);
+                }
             }
         });
 

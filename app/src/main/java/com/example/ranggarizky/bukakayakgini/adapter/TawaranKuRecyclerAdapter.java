@@ -10,21 +10,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ranggarizky.bukakayakgini.DetailRequestActivity;
-import com.example.ranggarizky.bukakayakgini.DetailTawaranActivity;
 import com.example.ranggarizky.bukakayakgini.R;
 import com.example.ranggarizky.bukakayakgini.model.RequestObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
-import com.example.ranggarizky.bukakayakgini.model.Tawaran;
 import com.example.ranggarizky.bukakayakgini.util.API;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,10 +39,16 @@ public class TawaranKuRecyclerAdapter extends RecyclerView.Adapter<TawaranKuRecy
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txtTitle)
         TextView txtTitle;
+        @BindView(R.id.txtDate)
+        TextView txtDate;
         @BindView(R.id.txtNama)
         TextView txtNama;
+        @BindView(R.id.txtStatus)
+        TextView txtStatus;
         @BindView(R.id.item_list)
         RecyclerView recyclerView;
+        @BindView(R.id.imgAva)
+        ImageView imgAva;
         @BindView(R.id.card_view)
         CardView card_view;
 
@@ -74,8 +75,19 @@ public class TawaranKuRecyclerAdapter extends RecyclerView.Adapter<TawaranKuRecy
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final RequestObject item = data.get(position);
-        holder.txtTitle.setText("\" "+item.getNama()+"\"");
-        loadUser(item.getId_user(),holder.txtNama);
+        holder.txtDate.setText(item.getCreated_at());
+        holder.txtTitle.setText(item.getNama());
+        holder.txtStatus.setText(item.getStatus_caption());
+        loadUser(item.getId_user(),holder.txtNama,holder.imgAva);
+        switch (item.getStatus()){
+            case "0" : holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_selesai));break;
+            case "2" : holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_transaksi));break;
+            case "1" : if(item.getSupplies().size() > 0){
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_ditawari));break;
+            }else{
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_menunggu));break;
+            }
+        }
         BarangTawaranRecyclerAdapter mAdapter = new BarangTawaranRecyclerAdapter(context,item.getSupplies());
 
         LinearLayoutManager mLayoutManagerOrder = new LinearLayoutManager(context);
@@ -95,7 +107,7 @@ public class TawaranKuRecyclerAdapter extends RecyclerView.Adapter<TawaranKuRecy
 
     }
 
-    private void loadUser(String id, final TextView txtName){
+    private void loadUser(String id, final TextView txtName,final ImageView imgAva){
         API apiService = API.client.create(API.class);
         Call<ResponseObject> call = apiService.getUserbyID(id);
 
@@ -106,6 +118,10 @@ public class TawaranKuRecyclerAdapter extends RecyclerView.Adapter<TawaranKuRecy
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if(response.body()!=null){
                     txtName.setText(response.body().getUser().getUsername());
+                    Picasso.with(context)
+                            .load(response.body().getUser().getAvatar())
+                            .placeholder(R.drawable.dummy)
+                            .into(imgAva);
                 }
             }
 

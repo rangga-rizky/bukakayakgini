@@ -1,6 +1,5 @@
 package com.example.ranggarizky.bukakayakgini.adapter;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,11 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ranggarizky.bukakayakgini.DetailTawaranActivity;
+import com.example.ranggarizky.bukakayakgini.DetailBarangActivity;
 import com.example.ranggarizky.bukakayakgini.R;
+import com.example.ranggarizky.bukakayakgini.TawaranListActivity;
 import com.example.ranggarizky.bukakayakgini.model.BarangBukaLapak;
-import com.example.ranggarizky.bukakayakgini.model.Rating;
-import com.example.ranggarizky.bukakayakgini.model.RequestObject;
 import com.example.ranggarizky.bukakayakgini.model.ResponseApi;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.model.Tawaran;
@@ -51,7 +49,6 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
 
     private List<Tawaran> data;
     private Context context;
-    private Boolean isFiltered;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txtStatus)
@@ -85,10 +82,9 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
     }
 
 
-    public TawaranRecyclerAdapter(Context context,List<Tawaran> data,Boolean isFiltered) {
+    public TawaranRecyclerAdapter(Context context,List<Tawaran> data) {
         this.data = data;
         this.context = context;
-        this.isFiltered = isFiltered;
     }
 
     @Override
@@ -108,7 +104,7 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
             holder.txtTandai.setVisibility(View.VISIBLE);
         }
 
-        if(position == 0 && !isFiltered && data.size() > 10){
+        if(item.getIs_recommended().equals("1")){
             holder.txtRecommended.setVisibility(View.VISIBLE);
             holder.txtHarga.setTextColor(context.getResources().getColor(R.color.white));
             holder.txtuserCount.setTextColor(context.getResources().getColor(R.color.white));
@@ -126,7 +122,7 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
             holder.main_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailTawaranActivity.class);
+                Intent intent = new Intent(context, DetailBarangActivity.class);
                 intent.putExtra("id",item.getId_produk());
                 intent.putExtra("user_id",item.getDemand().getId_user());
                 intent.putExtra("tawaran_id",item.getId());
@@ -189,12 +185,12 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
                     Log.e("cok", "no response");
                 } else {
                     if(apiresponse.getStatus().equals("OK")){
-                        insertDeal(item.getId());
                         Toast.makeText(context, "Barang telah ditambahkan ke keranjang bukalapak anda", Toast.LENGTH_SHORT).show();
 
                     }else{
                         Toast.makeText(context, apiresponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                    insertDeal(item.getId());
                 }
 
             }
@@ -263,7 +259,7 @@ public class TawaranRecyclerAdapter extends RecyclerView.Adapter<TawaranRecycler
     private void bukaKeranjang(){
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse("https://www.bukalapak.com/cart/carts"));
-        context.startActivity(i);
+        ((TawaranListActivity) context).startActivityForResult(i,99);
     }
 
     private void loadBarang(String id, final MyViewHolder holder){

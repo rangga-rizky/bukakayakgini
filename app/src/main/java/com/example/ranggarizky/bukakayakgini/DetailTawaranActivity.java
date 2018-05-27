@@ -2,37 +2,28 @@ package com.example.ranggarizky.bukakayakgini;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ranggarizky.bukakayakgini.adapter.CustomPagerAdapter;
 import com.example.ranggarizky.bukakayakgini.model.BarangBukaLapak;
-import com.example.ranggarizky.bukakayakgini.model.Join;
 import com.example.ranggarizky.bukakayakgini.model.ResponseApi;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
-import com.example.ranggarizky.bukakayakgini.model.ResponsePermintaanSingle;
+import com.example.ranggarizky.bukakayakgini.model.ResponseSingleTawaran;
+import com.example.ranggarizky.bukakayakgini.model.ResponseTawaran;
 import com.example.ranggarizky.bukakayakgini.util.API;
 import com.example.ranggarizky.bukakayakgini.util.Base64Converter;
 import com.example.ranggarizky.bukakayakgini.util.SessionManager;
@@ -40,7 +31,6 @@ import com.example.ranggarizky.bukakayakgini.util.WEB_API;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -103,90 +93,72 @@ public class DetailTawaranActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         sessionManager = new SessionManager(this);
-        id = getIntent().getStringExtra("id");
-        tawaran_status = getIntent().getStringExtra("tawaran_status");
-        tawaran_id = getIntent().getStringExtra("tawaran_id");;
-        Log.d("tes_id",tawaran_id);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait");
-        user_id = getIntent().getStringExtra("user_id");
-
-        if(sessionManager.getUid().equals(user_id)){
-            if(tawaran_status.equals("3")){
-                btnHapusTanda.setVisibility(View.VISIBLE);
-            }else{
-                btnTandai.setVisibility(View.VISIBLE);
-            }
-        }
-
-
+        tawaran_id = getIntent().getStringExtra("id");
         loadData();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
-
     private void loadData(){
 
-        API apiService = API.client.create(API.class);
-        Call<ResponseObject> call = apiService.getProdukbyID(id+".json");
+        WEB_API apiService = WEB_API.client.create(WEB_API.class);
+        Call<ResponseSingleTawaran> call = apiService.getSupplybyID(tawaran_id,"ant0k");
 
         //proses call
-        call.enqueue(new Callback<ResponseObject>() {
+        call.enqueue(new Callback<ResponseSingleTawaran>() {
             @Override
-            public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
+            public void onResponse(Call<ResponseSingleTawaran> call, Response<ResponseSingleTawaran> response) {
 
-                ResponseObject apiresponse = response.body();
+                ResponseSingleTawaran apiresponse = response.body();
 
                 if (response.body() == null) {
                     Log.e("cok", "no response");
                 } else {
-                    if(response.body().getProduct().getCondition().equals("new")){
+                    id = apiresponse.getData().getProduct().getId();
+                    if(apiresponse.getData().getProduct().getCondition().equals("new")){
                         txtKondisi.setText("Baru");
                     }else{
                         txtKondisi.setText("Bekas");
                     }
+                    user_id = apiresponse.getData().getId_seller();
 
-                    txtStok.setText(response.body().getProduct().getStock());
-                    txtDeskripsi.setText(Html.fromHtml(response.body().getProduct().getDesc()));
-                    if(response.body().getProduct().getSeller_level().length()==0){
+                    tawaran_status = apiresponse.getData().getStatus();
+                    if(tawaran_status.equals("3")){
+                        btnHapusTanda.setVisibility(View.VISIBLE);
+                    }else{
+                        btnTandai.setVisibility(View.VISIBLE);
+                    }
+                    tawaran_id = apiresponse.getData().getId();
+                    txtStok.setText(apiresponse.getData().getProduct().getStock());
+                    txtDeskripsi.setText(Html.fromHtml(apiresponse.getData().getProduct().getDesc()));
+                    if(apiresponse.getData().getProduct().getSeller_level().length()==0){
                         txtLevel.setVisibility(View.GONE);
                     }else{
-                        txtLevel.setText(response.body().getProduct().getSeller_level());
+                        txtLevel.setText(apiresponse.getData().getProduct().getSeller_level());
 
                     }
-                    txtTitle.setText(response.body().getProduct().getName());
-                    txtuserCount.setText("("+response.body().getProduct().getRating().getUser_count()+")");
-                    txtNamaToko.setText(response.body().getProduct().getSeller_name());
-                    txtKota.setText(response.body().getProduct().getCity());
-                    rating.setRating(response.body().getProduct().getRating().getAverage_rate());
+                    txtTitle.setText(apiresponse.getData().getProduct().getName());
+                    txtuserCount.setText("("+apiresponse.getData().getProduct().getRating().getUser_count()+")");
+                    txtNamaToko.setText(apiresponse.getData().getProduct().getSeller_name());
+                    txtKota.setText(apiresponse.getData().getProduct().getCity());
+                    rating.setRating(apiresponse.getData().getProduct().getRating().getAverage_rate());
                     NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
-                    txtHarga.setText("Rp"+rupiahFormat.format(Double.parseDouble(apiresponse.getProduct().getPrice())));
+                    txtHarga.setText("Rp"+rupiahFormat.format(Double.parseDouble(apiresponse.getData().getProduct().getPrice())));
                     Picasso.with(getApplicationContext())
-                            .load(response.body().getProduct().getSeller_avatar())
+                            .load(apiresponse.getData().getProduct().getSeller_avatar())
                             .placeholder(R.drawable.dummy)
                             .into(imgAva);
-                    if(response.body().getProduct().getSeller_level_badge_url().length() > 0){
+                    if(apiresponse.getData().getProduct().getSeller_level_badge_url().length() > 0){
 
                         Picasso.with(getApplicationContext())
-                                .load(response.body().getProduct().getSeller_level_badge_url())
+                                .load(apiresponse.getData().getProduct().getSeller_level_badge_url())
                                 .placeholder(R.drawable.dummy)
                                 .into(level);
                     }else{
                         level.setVisibility(View.GONE);
                     }
 
-                    mCustomPagerAdapter = new CustomPagerAdapter(getApplicationContext(),response.body().getProduct().getImages());
+                    mCustomPagerAdapter = new CustomPagerAdapter(getApplicationContext(),apiresponse.getData().getProduct().getImages());
                     mPager.setAdapter(mCustomPagerAdapter);
                     indicator.setViewPager( mPager);
                 }
@@ -195,13 +167,15 @@ public class DetailTawaranActivity extends AppCompatActivity {
 
 
             @Override
-            public void onFailure(Call<ResponseObject> call, Throwable t) {
+            public void onFailure(Call<ResponseSingleTawaran> call, Throwable t) {
                 // Log error
                 Log.e("cok", "onFailure: ", t.fillInStackTrace());
                 Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 
 
     @OnClick(R.id.btnTandai)
@@ -234,6 +208,7 @@ public class DetailTawaranActivity extends AppCompatActivity {
                         }else if(status.equals("3")){
                             Toast.makeText(getApplicationContext(), "Tawaran Berhasil ditandai", Toast.LENGTH_SHORT).show();
                         }
+                        setResult(99);
                         finish();
                     }else{
                         Toast.makeText(getApplicationContext(), "Terjadi kesalahan coba lain kali", Toast.LENGTH_SHORT).show();
@@ -299,6 +274,7 @@ public class DetailTawaranActivity extends AppCompatActivity {
                 ResponseObject apiresponse = response.body();
                 if (response.body() == null) {
                     Log.e("cok", "no response");
+                    Toast.makeText(getApplicationContext(), "Transaksi Gagal mohon coba lagi", Toast.LENGTH_SHORT).show();
                 } else {
                     if(apiresponse.getStatus().equals("OK")){
                         Toast.makeText(getApplicationContext(), "Barang telah ditambahkan ke keranjang bukalapak anda", Toast.LENGTH_SHORT).show();
@@ -378,5 +354,15 @@ public class DetailTawaranActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

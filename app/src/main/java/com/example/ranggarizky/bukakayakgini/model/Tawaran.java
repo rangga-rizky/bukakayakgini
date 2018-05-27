@@ -18,6 +18,10 @@ public class Tawaran {
     @Expose
     private String id;
 
+    @SerializedName("is_recommended")
+    @Expose
+    private String is_recommended;
+
     @SerializedName("id_request")
     @Expose
     private String id_request;
@@ -43,7 +47,9 @@ public class Tawaran {
     @Expose
     private RequestObject demand;
 
-
+    @SerializedName("product")
+    @Expose
+    private BarangBukaLapak product;
 
     @SerializedName("supplies")
     @Expose
@@ -119,5 +125,21 @@ public class Tawaran {
 
     public String getId() {
         return id;
+    }
+
+    public void setProduct(BarangBukaLapak product) {
+        this.product = product;
+    }
+
+    public BarangBukaLapak getProduct() {
+        return product;
+    }
+
+    public void setIs_recommended(String is_recommended) {
+        this.is_recommended = is_recommended;
+    }
+
+    public String getIs_recommended() {
+        return is_recommended;
     }
 }

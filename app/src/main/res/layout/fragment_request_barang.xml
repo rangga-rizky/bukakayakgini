@@ -1,14 +1,14 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp"
     android:background="@color/background"
     tools:context="com.example.ranggarizky.bukakayakgini.fragment.SettingFragment"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView
-        android:layout_above="@+id/btnRequest"
+        android:layout_above="@+id/footer"
         android:layout_width="match_parent"
+        android:padding="16dp"
         android:layout_height="match_parent">
 
         <!-- TODO: Update blank fragment layout -->
@@ -47,16 +47,23 @@
 
     </ScrollView>
 
-
-    <Button
-        android:id="@+id/btnRequest"
-        android:layout_marginTop="25dp"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:padding="12dp"
+        android:id="@id/footer"
+        android:background="@color/white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/primary_rounded_button"
-        android:layout_alignParentBottom="true"
-        android:text="LANJUTKAN"
-        android:textColor="@color/white" />
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btnRequest"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_rounded_button"
+            android:text="LANJUTKAN"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

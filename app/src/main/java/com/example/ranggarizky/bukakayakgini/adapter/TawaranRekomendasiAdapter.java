@@ -1,14 +1,12 @@
 package com.example.ranggarizky.bukakayakgini.adapter;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,17 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ranggarizky.bukakayakgini.DetailTawaranActivity;
+import com.example.ranggarizky.bukakayakgini.DetailBarangActivity;
 import com.example.ranggarizky.bukakayakgini.R;
-import com.example.ranggarizky.bukakayakgini.RequestJoinActivity;
 import com.example.ranggarizky.bukakayakgini.model.BarangBukaLapak;
-import com.example.ranggarizky.bukakayakgini.model.Join;
 import com.example.ranggarizky.bukakayakgini.model.ResponseApi;
 import com.example.ranggarizky.bukakayakgini.model.ResponseObject;
 import com.example.ranggarizky.bukakayakgini.model.Tawaran;
@@ -57,11 +52,11 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
     //private static final int TYPE_FOOTER = 2;
 
     ArrayList<Tawaran> generics;
-    Tawaran dataHeader;
+    ArrayList<Tawaran> dataHeader;
     String jumlahRequest,jumlahJoin;
     Context context;
 
-    public TawaranRekomendasiAdapter(Context context, ArrayList<Tawaran> generics,Tawaran dataHeader) {
+    public TawaranRekomendasiAdapter(Context context, ArrayList<Tawaran> generics,ArrayList<Tawaran> dataHeader) {
         this.context = context;
         this.dataHeader = dataHeader;
         this.generics = generics;
@@ -84,26 +79,26 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
         return generics.get (position);
     }
 
-
     @Override
     public void onBindViewHolder (RecyclerView.ViewHolder holder, int position) {
 
         if(holder instanceof HeaderViewHolder) {
             final HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
-
-            if(dataHeader.getStatus().equals("3")){
+            final Tawaran headerItem = dataHeader.get(position);
+            if(headerItem.getStatus().equals("3")){
                 headerHolder.txtTandai.setVisibility(View.VISIBLE);
             }
-            loadBarangHeader(dataHeader.getId_produk(),headerHolder);
+            loadBarangHeader(headerItem.getId_produk(),headerHolder);
             headerHolder.main_content.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailTawaranActivity.class);
-                    intent.putExtra("id",dataHeader.getId_produk());
-                    intent.putExtra("user_id",dataHeader.getDemand().getId_user());
-                    intent.putExtra("tawaran_id",dataHeader.getId());
-                    intent.putExtra("tawaran_status",dataHeader.getStatus());
-                    context.startActivity(intent);
+                    Intent intent = new Intent(context, DetailBarangActivity.class);
+                    intent.putExtra("id",headerItem.getId_produk());
+                    intent.putExtra("user_id",headerItem.getDemand().getId_user());
+                    intent.putExtra("tawaran_id",headerItem.getId());
+                    intent.putExtra("tawaran_status",headerItem.getStatus());
+                    ((Activity)context).startActivityForResult(intent,99);
+
                 }
             });
 
@@ -122,7 +117,7 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
                         @Override
                         public void onClick(View view) {
                             dialog.dismiss();
-                            pilihBarang(dataHeader);
+                            pilihBarang(headerItem);
                         }
                     });
                     btnBatal.setOnClickListener(new View.OnClickListener() {
@@ -135,14 +130,13 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
                 }
             });
 
-
         } else if(holder instanceof GenericViewHolder) {
             final Tawaran item;
             final GenericViewHolder genericHolder = (GenericViewHolder) holder;
             if(dataHeader == null){
                 item = getItem(position);
             }else{
-                item = getItem(position - 1);
+                item = getItem(position - dataHeader.size());
             }
 
             if(item.getStatus().equals("3")){
@@ -152,7 +146,7 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
             genericHolder.main_content.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DetailTawaranActivity.class);
+                    Intent intent = new Intent(context, DetailBarangActivity.class);
                     intent.putExtra("id",item.getId_produk());
                     intent.putExtra("user_id",item.getDemand().getId_user());
                     intent.putExtra("tawaran_id",item.getId());
@@ -175,7 +169,7 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
                     btnTerima.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            dialog.dismiss();
+                           dialog.dismiss();
                             pilihBarang(item);
                         }
                     });
@@ -191,7 +185,7 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
         }
     }
 
-    private void pilihBarang(Tawaran item){
+    private void pilihBarang(final Tawaran item){
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
@@ -213,9 +207,11 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
                 ResponseObject apiresponse = response.body();
                 if (response.body() == null) {
                     Log.e("cok", "no response");
+                    Toast.makeText(context, "Transaksi Gagal mohon coba lagi", Toast.LENGTH_SHORT).show();
+
                 } else {
                     if(apiresponse.getStatus().equals("OK")){
-                        openRedirectDialog();
+                        insertDeal(item.getId());
                         Toast.makeText(context, "Barang telah ditambahkan ke keranjang bukalapak anda", Toast.LENGTH_SHORT).show();
 
                     }else{
@@ -232,6 +228,34 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
                 progressDialog.dismiss();
                 Log.e("cok", "onFailure: ", t.fillInStackTrace());
                 Toast.makeText(context, "Connection Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private  void insertDeal(final String tawaran_id){
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        SessionManager sessionManager = new SessionManager(context);
+        WEB_API apiService = WEB_API.client.create(WEB_API.class);
+        Call<ResponseApi> call = apiService.deal(tawaran_id,sessionManager.getUid(),"ant0k");
+
+        //proses call
+        call.enqueue(new Callback<ResponseApi>() {
+            @Override
+            public void onResponse(Call<ResponseApi> call, Response<ResponseApi> response) {
+                progressDialog.dismiss();
+                openRedirectDialog();
+            }
+
+
+            @Override
+            public void onFailure(Call<ResponseApi> call, Throwable t) {
+                // Log error
+                Log.e("cok", "onFailure: ", t.fillInStackTrace());
+                Toast.makeText(context, "Connection Failed", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }
@@ -328,7 +352,6 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
 
             }
 
-
             @Override
             public void onFailure(Call<ResponseObject> call, Throwable t) {
                 Log.e("cok", "onFailure: ", t.fillInStackTrace());
@@ -336,7 +359,7 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
         });
     }
 
-    //    need to override this method
+    // need to override this method
     @Override
     public int getItemViewType (int position) {
         if(dataHeader == null){
@@ -348,13 +371,8 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
         return TYPE_ITEM;
     }
 
-
     private boolean isPositionHeader (int position) {
-        return position == 0;
-    }
-
-    private boolean isPositionFooter (int position) {
-        return position == generics.size () + 1;
+        return position < dataHeader.size();
     }
 
     @Override
@@ -362,7 +380,7 @@ public class TawaranRekomendasiAdapter extends RecyclerView.Adapter<RecyclerView
         if(dataHeader == null){
             return generics.size ();
         }
-        return generics.size () + 1;
+        return generics.size () + dataHeader.size();
     } //dengan footer + 2
 
 

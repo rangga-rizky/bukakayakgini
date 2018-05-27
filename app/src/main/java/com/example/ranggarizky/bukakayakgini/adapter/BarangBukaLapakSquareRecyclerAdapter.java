@@ -83,8 +83,8 @@ public class BarangBukaLapakSquareRecyclerAdapter extends RecyclerView.Adapter<B
         final BarangBukaLapak item = verticalList.get(position);
         NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
         holder.txtHarga.setText("Rp"+rupiahFormat.format(Double.parseDouble(item.getPrice())));
-        if(item.getName().length() > 25){
-            holder.txtTitle.setText(item.getName().substring(0,25)+"...");
+        if(item.getName().length() > 12){
+            holder.txtTitle.setText(item.getName().substring(0,13)+"...");
         }else{
             holder.txtTitle.setText(item.getName());
         }

@@ -50,8 +50,6 @@ public class BeforeRequestFragment extends Fragment {
     TextView txtBukaKayaGini;
     @BindView(R.id.txtBukaLapak)
     TextView txtBukaLapak;
-    @BindView(R.id.btnHelp)
-    ImageView btnHelp;
 
     private Boolean ketemu = false;
     private BarangBukaLapakSquareRecyclerAdapter barangBukaLapakRecyclerAdapter;
@@ -83,7 +81,7 @@ public class BeforeRequestFragment extends Fragment {
 
     private void loadProdukBL(String word){
         API apiService = API.client.create(API.class);
-        Call<ResponseObject> call = apiService.getProduk(word,"1","6");
+        Call<ResponseObject> call = apiService.getProduk(word,"1","10");
 
         //proses call
         call.enqueue(new Callback<ResponseObject>() {
@@ -137,7 +135,6 @@ public class BeforeRequestFragment extends Fragment {
                         horizontal_request_recycler_view.setAdapter(requestSquareRecyclerAdapter);
                         horizontal_request_recycler_view.setVisibility(View.VISIBLE);
                         txtBukaKayaGini.setVisibility(View.VISIBLE);
-                        btnHelp.setVisibility(View.VISIBLE);
                     }else{
                         horizontal_request_recycler_view.setVisibility(View.GONE);
                     }
@@ -163,19 +160,7 @@ public class BeforeRequestFragment extends Fragment {
         gotoInputRequest();
     }
 
-    @OnClick(R.id.btnHelp)
-    public void btnHelp(View view){
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_help_join);
-        Button btnTerima = (Button) dialog.findViewById(R.id.btnTerima);
-        btnTerima.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
+
 
     private void gotoInputRequest(){
         Intent intent = new Intent(getActivity(), InputRequestActivity.class);

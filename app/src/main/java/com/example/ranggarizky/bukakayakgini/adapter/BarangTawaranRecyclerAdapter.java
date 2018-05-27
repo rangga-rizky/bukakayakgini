@@ -39,6 +39,8 @@ public class BarangTawaranRecyclerAdapter extends RecyclerView.Adapter<BarangTaw
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txtHarga)
         TextView txtHarga;
+        @BindView(R.id.txtTitle)
+        TextView txtTitle;
         @BindView(R.id.txtStatus)
         TextView txtStatus;
         @BindView(R.id.imgBarang)
@@ -70,6 +72,25 @@ public class BarangTawaranRecyclerAdapter extends RecyclerView.Adapter<BarangTaw
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final Tawaran item = data.get(position);
         loadBarang(item.getId_produk(),holder);
+        switch (item.getStatus()){
+            case "3" :
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_ditandai));
+                holder.txtStatus.setText("Dipertimbangkan");
+                break;
+            case "4" :
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_dipilih));
+                holder.txtStatus.setText("Dipilih");
+                break;
+            case "1" :
+               // holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_menunggu));
+                holder.txtStatus.setTextColor(context.getResources().getColor(R.color.grey));
+                holder.txtStatus.setText("Menunggu");
+                break;
+            case "2" :
+                holder.txtStatus.setText("Diabaikan");
+                holder.txtStatus.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.status_ignore));
+                break;
+        }
         holder.content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,11 +111,7 @@ public class BarangTawaranRecyclerAdapter extends RecyclerView.Adapter<BarangTaw
             @Override
             public void onResponse(Call<ResponseObject> call, Response<ResponseObject> response) {
                 if(response.body()!=null){
-                    if(response.body().getProduct().equals("new")){
-                        holder.txtStatus.setText("Baru");
-                    }else{
-                        holder.txtStatus.setText("Bekas");
-                    }
+                    holder.txtTitle.setText(response.body().getProduct().getName());
                     NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
                     holder.txtHarga.setText("Rp"+rupiahFormat.format(Double.parseDouble(response.body().getProduct().getPrice())));
                     Picasso.with(context)
